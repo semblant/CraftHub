@@ -6,6 +6,9 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 
+// Require Middleware
+const cookieSession = require('cookie-session');
+
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -25,6 +28,12 @@ app.use(
   })
 );
 app.use(express.static('public'));
+
+// Middleware
+app.use(cookieSession({
+  name: 'session',
+  keys: ['keys1'],
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -49,7 +58,15 @@ app.use('/login', loginRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+
+  // Store user info
+  const currentUser = req.session.user_id;
+  console.log('current cookie: ', currentUser)
+  const templateVars = {
+    currentUser
+  };
+
+  res.render('index', templateVars);
 });
 
 app.listen(PORT, () => {
