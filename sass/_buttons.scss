@@ -1,0 +1,14 @@
+@use 'base';
+
+.button {
+  background-color: base.$button-color;
+  color: base.$button-text-colour;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(base.$button-color, 10%);
+  }
+}
