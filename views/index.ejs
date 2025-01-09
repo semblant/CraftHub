@@ -12,19 +12,33 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/nav.css" />
+
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 </head>
-<header>
-  <div class="login">
-    <!-- <a>Login:</a> -->
-    <form method="POST" action="/login">
-      <input name="userId" placeholder="UserID">
-      <input type="submit" value="Login">
-    </form>
-  </div>
-</header>
+<nav>
+  <!-- If user is logged in -->
+  <% if (currentUser) { %>
+    <div class="loginTrue">
+      <p>'My Favourites' will display - user logged in</p>
+    </div>
+  <% } else { %>
+  <!-- If user is not logged in -->
+    <div class="loginFalse">
+      <p>No header displays - user not logged in</p>
+      <!-- <a>Login:</a> -->
+      <form method="POST" action="/login">
+        <input name="userId" placeholder="UserID">
+        <input type="submit" value="Login">
+      </form>
+    </div>
+  <% } %>
+  </nav>
+
+
+
 <body>
   <h1>Have fun! 🥔</h1>
 </body>
