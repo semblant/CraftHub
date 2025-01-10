@@ -65,7 +65,7 @@ app.get('/', (req, res) => {
 
   // Store user info
   const currentUser = req.session.user_id;
-  console.log('current cookie: ', currentUser)
+  console.log('current cookie: ', currentUser);
   const templateVars = {
     currentUser
   };
