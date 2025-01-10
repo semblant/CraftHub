@@ -28,6 +28,7 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use('/docs', express.static('docs')); // serve static files from the 'docs' folder
 
 // Middleware
 app.use(cookieSession({
