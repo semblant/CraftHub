@@ -52,8 +52,9 @@ router.post('/', (req, res) => {
     // Check if user exists in DB
     if (!user) return res.status(400).send(`A user with ID ${userId} does not exist.`);
 
-    // If user exists, save their ID in a cookie
-    req.session.user_id = user.id;
+    // If user exists, save cookie as 1 - admin, 2 - buyer
+    if (user.is_admin) req.session.user_status = 1;
+    else req.session.user_status = 2;
 
     // redirect to root page
     res.redirect('/');

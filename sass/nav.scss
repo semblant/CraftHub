@@ -3,13 +3,9 @@
 nav {
   position: fixed; /* keeps the header at the top */
   top: 0; /* keeps the header at the top */
-  overflow: hidden; /* keeps header in view with scrolling */
   width: 100%;
   height: 100px;
   padding: 5px 50px 5px 70px;
-
-  box-shadow: base.$primary-border-color 2px 2px 7px;
-  box-sizing: border-box;
 
   display: flex;
   align-items: center;
@@ -18,6 +14,7 @@ nav {
 
   background-color: base.$header-colour;
   color: base.$header-text-colour;
+  box-shadow: base.$primary-border-color 2px 2px 7px;
 }
 
 .crafthubLogo {
@@ -25,9 +22,11 @@ nav {
   height: 75px;
 }
 
+/* Menu Styling */
 .fa-solid.fa-bars {
   font-size: 35px;
 }
+
 
 .fa-solid.fa-bars:hover {
   animation: bounce 0.3s infinite alternate
@@ -36,18 +35,14 @@ nav {
 @keyframes bounce {
   to {transform: scale(1.2);}
 }
-
-/* Style for menu */
 .menuItems{
   position: fixed; /* display menu overtop of content */
   top: 50px; /* Adjust to match your layout */
   right: 20px; /* Adjust to match your layout */
   background-color: base.$primary-border-color;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 10px;
   display: none; /* Initially hidden */
-  z-index: 1000;
 
   :first-child {
     font-size: 20px;
@@ -73,4 +68,26 @@ nav {
     background-color: base.$header-colour;
     cursor: pointer;
   }
+}
+
+
+/* Login Styling */
+.userId {
+  border: base.$primary-border-color;
+  margin-right: 10px;
+  height: 30px;
+  border-radius: 5px;
+  box-shadow: base.$primary-border-color 2px 2px 2px 2px;
+}
+.loginButton {
+  background-color: base.$button-color;
+  color: base.$button-text-colour;
+  border-radius: 50px;
+  height: 30px;
+  width: 100px;
+  border: none;
+
+}
+.loginButton:hover {
+  box-shadow: base.$primary-border-color 2px 2px 2px 1px;
 }
