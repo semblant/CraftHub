@@ -2,14 +2,14 @@
  * Global Layout
  */
 
- @use 'base';
+@use 'base';
 
- body {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   min-height: 100vh;
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 
-   background-color: base.$background-colour
- }
+  background-color: base.$background-colour
+}
