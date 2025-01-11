@@ -16,30 +16,11 @@
 
 
   <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
+  <script defer src="scripts/app.js"></script>
 </head>
-  <nav>
-    <img class="crafthubLogo" src="../docs/CraftHub_Logo_white.png" alt="CraftHub logo in the colour white">
-    <!-- If user is logged in -->
-    <% if (currentUser) { %>
-    <div class="loginTrue">
-      <p>'My Favourites' will display - user logged in</p>
-    </div>
-    <% } else { %>
-    <!-- If user is not logged in -->
-    <div class="loginFalse">
-      <!-- <a>Login:</a> -->
-      <form class="loginForm" method="POST" action="/login">
-        <input class="userId" name="userId" placeholder="UserID">
-        <input class="loginButton" type="submit" value="Login">
-      </form>
-    </div>
-    <% } %>
-  </nav>
-
-
 
 <body>
+  <%- include('partials/_header') %>
   <h1>Have fun! 🥔</h1>
 </body>
 

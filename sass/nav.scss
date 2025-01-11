@@ -1,20 +1,21 @@
 @use 'base';
 
 nav {
-  position: fixed;
-  box-shadow: base.$primary-border-color 2px 2px 7px;
+  position: fixed; /* keeps the header at the top */
+  top: 0; /* keeps the header at the top */
+  overflow: hidden; /* keeps header in view with scrolling */
   width: 100%;
   height: 100px;
-  padding: 5px 40px 5px 50px;
+  padding: 5px 50px 5px 70px;
+
+  box-shadow: base.$primary-border-color 2px 2px 7px;
+  box-sizing: border-box;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
   align-content: center;
+  justify-content: space-between; /* put space between header and menu items */
 
-  top: 0; /* keeps the header at the top */
-  overflow: hidden; /* keeps header in view with scrolling */
-  box-sizing: border-box;
   background-color: base.$header-colour;
   color: base.$header-text-colour;
 }
@@ -24,36 +25,52 @@ nav {
   height: 75px;
 }
 
-.loginFalse {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: center;
+.fa-solid.fa-bars {
+  font-size: 35px;
 }
 
-.loginForm {
-  width: 320px;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: space-between;
+.fa-solid.fa-bars:hover {
+  animation: bounce 0.3s infinite alternate
+  }
+
+@keyframes bounce {
+  to {transform: scale(1.2);}
 }
 
-.userId {
-  border: 2px solid base.$primary-border-color;
+/* Style for menu */
+.menuItems{
+  position: fixed; /* display menu overtop of content */
+  top: 50px; /* Adjust to match your layout */
+  right: 20px; /* Adjust to match your layout */
+  background-color: base.$primary-border-color;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  display: none; /* Initially hidden */
+  z-index: 1000;
+
+  :first-child {
+    font-size: 20px;
+    font-weight: bold;
+    list-style-type: none;
+    padding-bottom: 3px 2px 10px 3px;
+    border: none;
+  }
+
+  li {
+  list-style-type: none;
+  font-size: 16px;
+  font-family: sans-serif; /* for now */
+  padding: 0px 5px 3px 10px;
+  margin: 5px 0;
   border-radius: 5px;
-  box-shadow: base.$primary-border-color 2px 2px 10px;;
-  padding: 5px;
-  width: 200px;
-}
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  }
 
-.loginButton {
-  background-color: base.$button-color;
-  color: base.$button-text-colour;
-  border: none;
-  border-radius: 50px;
-  text-align: center;
-  width: 100px;
-  padding: 2px 3px 2px 3px;
-  box-shadow: base.$primary-border-color 2px 2px 2px 1px;
+  li:not(:first-child):hover {
+    background-color: base.$header-colour;
+    cursor: pointer;
+  }
 }
