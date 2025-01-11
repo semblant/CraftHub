@@ -19,7 +19,7 @@ const router  = express.Router();
  */
 const userLookup = (userID) => {
   // Validate User (in case this function is used again elsewhere)
-  if (!userID ) {
+  if (!userID) {
     return Promise.reject(new Error('Invalid userID: cannot be empty'));
   }
 

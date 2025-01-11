@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   '/styles',
   sassMiddleware({
-    source: __dirname + '/styles',
+    source: __dirname + '/sass',
     destination: __dirname + '/public/styles',
     isSass: false, // false => scss, true => sass
   })
@@ -42,7 +42,8 @@ const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
-
+const itemsApiRoutes = require('./routes/items-api');
+const homeRoutes = require('./routes/home');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -51,6 +52,8 @@ app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/login', loginRoutes);
+app.use('/api/items', itemsApiRoutes);
+app.use('/', homeRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
@@ -59,15 +62,18 @@ app.use('/login', loginRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
+
   // Store user info
   const currentUser = req.session.user_id;
+  console.log('current cookie: ', currentUser);
   const templateVars = {
     currentUser
   };
 
-  res.render('index', templateVars);
+  res.render('home', templateVars);
 });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
