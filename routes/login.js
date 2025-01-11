@@ -35,7 +35,7 @@ const userLookup = (userID) => {
     .catch((err) => {
       console.error('Error querying user:', err);
       throw err; // throw the error for handling in the calling function
-  });
+    });
 };
 
 // On successful "login" user is redirected to main page to display logged in menu options
@@ -59,11 +59,11 @@ router.post('/', (req, res) => {
     // redirect to root page
     res.redirect('/');
   })
-  .catch((err) => {
+    .catch((err) => {
     // Handle any errors that occur during async lookup
-    console.log('Error during user lookup: ', err);
-    res.status(500).send('An error occured during login.');
-  })
+      console.log('Error during user lookup: ', err);
+      res.status(500).send('An error occured during login.');
+    });
 });
 
 module.exports = router;

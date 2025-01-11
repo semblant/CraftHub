@@ -6,6 +6,7 @@ CREATE TABLE favorites (
   user_id INT,
   item_id INT,
   UNIQUE (user_id, item_id),
+  is_active BOOLEAN,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE
 );
