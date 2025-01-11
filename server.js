@@ -64,8 +64,10 @@ app.use('/', homeRoutes);
 app.get('/', (req, res) => {
   // Store user info
   const currentUser = req.session.user_status;
+  const name = req.session.username;
   const templateVars = {
-    currentUser
+    currentUser,
+    name
   };
 
   res.render('home', templateVars);
