@@ -14,7 +14,7 @@ body {
 }
 
 nav {
-  margin-bottom: 120px; /* Add margin below the nav bar */
+  margin-bottom: 120px;
 }
 
 .search-bar {
@@ -28,8 +28,6 @@ nav {
   align-items: center;
   padding: 0 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative; /* Ensure it stays in the flow of the document */
-  z-index: 999;
 }
 
 .search-bar input {
