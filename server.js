@@ -62,10 +62,8 @@ app.use('/', homeRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-
   // Store user info
-  const currentUser = req.session.user_id;
-  console.log('current cookie: ', currentUser);
+  const currentUser = req.session.user_status;
   const templateVars = {
     currentUser
   };
@@ -77,4 +75,3 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-console.log('hello!')

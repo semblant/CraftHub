@@ -1,0 +1,27 @@
+<nav>
+    <img class="crafthubLogo" src="../docs/CraftHub_Logo_white.png" alt="CraftHub logo in the colour white">
+    <!-- If user is logged in display menu options -->
+    <% if (currentUser) { %>
+
+    <!-- Hamburger Icon -->
+    <i class="fa-solid fa-bars"></i>
+    <div class="menuItems">
+      <li class="loginTrue">Hello "<%= currentUser%>" [name instead]!</li>
+      <li>Create Listing</li>
+      <!-- STRETCH FEATURE <li>My Listings</li> -->
+      <li>Messages</li>
+      <!-- Filter instead? <li>My Favourites</li> -->
+      <li>Logout</li>
+    </div>
+    <% } else { %>
+    <!-- If user is not logged in display login form  -->
+    <div class="loginFalse">
+      <!-- <a>Login:</a> -->
+      <form class="loginForm" method="POST" action="/login">
+        <input class="userId" name="userId" placeholder="UserID">
+        <input class="loginButton" type="submit" value="Login">
+      </form>
+    </div>
+    <% } %>
+</nav>
+

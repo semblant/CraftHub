@@ -3,3 +3,8 @@ public/styles
 .env
 *.log
 *.sqlite3
+routes/test-api.js
+routes/test.js
+views/test.ejs
+public/scripts/test.js
+db/queries/test.js
