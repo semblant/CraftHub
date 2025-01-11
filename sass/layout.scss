@@ -1,6 +1,52 @@
+@use 'base';
 // See: https://sass-lang.com/
 
 body,
 html {
   margin: 0;
+}
+
+/* Desktop View */
+@media only screen and (min-width: 961px) {
+  /* Hide Menu Icon */
+  .fa-solid.fa-bars {
+    display: none;
+  }
+
+  nav {
+    justify-content: flex-start;
+  }
+
+  div.menuItems {
+    width: 85%;
+    margin-right: 0;
+    position: static;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    border: none;
+    background-color: base.$header-colour;
+
+    li:not(:first-child) {
+      font-size: 20px;
+    }
+
+    li:first-child {
+      order: 4; /* put name on the right*/
+      font-size: 24px;
+      box-sizing: border-box;
+      background-color: base.$primary-border-color;
+      padding: 0 10px 0 10px;
+      display: flex;
+      align-items: center;
+      margin: 0;
+      height: 80px;
+    }
+
+    li:nth-child(4) {
+      margin-right: 10px;
+      margin-left: auto;
+      padding-right: 10px;
+    }
+  }
 }
