@@ -2,11 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="/styles/messages.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <!-- <link rel="stylesheet" href="/styles/nav.css" /> -->
 </head>
 <body>
-  <h1>Messages</h1>
+  <section id="messaging-container">
+
+    <!-- Sidebar for conversations-->
+     <div class="conversation-list">
+      <h3>Conversations</h3>
+      <ul>
+        <li class="conversation active">
+          <div class="name">Buyer 1</div>
+          <div class="product">Product A</div>
+        </li>
+        <li class="conversation">
+          <div class="name">Buyer 2</div>
+          <div class="product">Product B</div>
+        </li>
+      </ul>
+     </div>
+
+     <!-- Chat Window -->
+     <div class="chat-window">
+      <div class="chat-header">Conversation with Buyer 1</div>
+      <div class="chat-messages">
+        <div class="message seller">Hi there!</div>
+        <div class="message buyer">Is this still available?</div>
+      </div>
+     </div>
+  </section>
 </body>
 </html>
