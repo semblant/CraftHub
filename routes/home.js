@@ -3,8 +3,8 @@ const router = express.Router();
 const db = require('../db/connection');
 
 router.get('/', (req, res) => {
-  const currentUser = req.session ? req.session.user_id : null;
-
+  const currentUser = req.session.user_status ? req.session.user_status : null;
+  const name = req.session.username
   db.query(`
     SELECT items.*, users.name AS username, item_images.image_url
     FROM items
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   `)
   .then(data => {
     const items = data.rows;
-    res.render('home', { currentUser, items });
+    res.render('home', { currentUser, items, name });
   })
   .catch(err => {
     res.status(500).json({ error: err.message });
