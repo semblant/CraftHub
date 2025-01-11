@@ -1,45 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title>Home</title>
-
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/nav.css" />
-
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css">
+  <link rel="stylesheet" href="/vendor/border-box.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/nav.css">
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/items.js"></script>
 </head>
-
-<nav>
-  <img class="crafthubLogo" src="/docs/CraftHub Logo white.png" alt="CraftHub logo in the colour white">
-  <!-- If user is logged in -->
-  <% if (currentUser) { %>
-    <div class="loginTrue">
-      <p>'My Favourites' will display - user logged in</p>
-    </div>
+<body>
+  <nav>
+    <img class="crafthubLogo" src="/docs/CraftHub Logo white.png" alt="CraftHub logo in the colour white">
+    <!-- If user is logged in -->
+    <% if (currentUser) { %>
+      <div class="loginTrue">
+        <p>'My Favourites' will display - user logged in</p>
+      </div>
     <% } else { %>
-    <!-- If user is not logged in -->
-    <div class="loginFalse">
-      <!-- <a>Login:</a> -->
-      <form class="loginForm" method="POST" action="/login">
-        <input class="userId" name="userId" placeholder="UserID">
-        <input class="loginButton" type="submit" value="Login">
-      </form>
-    </div>
+      <!-- If user is not logged in -->
+      <div class="loginFalse">
+        <!-- <a>Login:</a> -->
+        <form class="loginForm" method="POST" action="/login">
+          <input class="userId" name="userId" placeholder="UserID">
+          <input class="loginButton" type="submit" value="Login">
+        </form>
+      </div>
     <% } %>
   </nav>
-
-<body>
-  <h1>Products</h1>
-  <ul id="items"></ul>
+  <div class="search-bar">
+    <input type="text" placeholder="Search...">
+    <i class="search-icon">🔍</i>
+  </div>
+  <div class="background-layer"></div>
+  <div class="filter-buttons">
+    <button class="filter-button">
+      <i class="filter-icon">🔍</i>
+      <i class="price-icon">$</i>
+    </button>
+    <button class="filter-button">
+      <i class="filter-icon">🔍</i>
+      <i class="heart-icon">❤️</i>
+    </button>
+  </div>
+  <div class="product-listings">
+    <% items.forEach(item => { %>
+      <div class="product">
+        <div class="product-header">
+          <span class="product-title"><%= item.title %></span>
+          <span class="product-price">$<%= item.price %></span>
+        </div>
+        <img src="<%= item.image_url %>" alt="<%= item.title %>">
+        <div class="product-footer">
+          <span class="user-name"><%= item.username %></span>
+          <button class="chat-button">💬</button>
+        </div>
+        <i class="favorite-icon">❤️</i>
+      </div>
+    <% }) %>
+  </div>
+  <button class="back-to-top">⬆️</button>
+  <button class="chat-button">
+    💬
+    <div class="notification">1</div>
+  </button>
 </body>
-
 </html>
