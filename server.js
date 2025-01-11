@@ -59,10 +59,8 @@ app.use('/login', loginRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-
   // Store user info
   const currentUser = req.session.user_id;
-  console.log('current cookie: ', currentUser)
   const templateVars = {
     currentUser
   };

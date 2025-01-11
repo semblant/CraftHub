@@ -2,11 +2,9 @@
 
 
 $(document).ready(function() {
-  console.log('jQuery is working!')
   let isSubmenuVisible = false; // Track submenu visibility
   // Add event listener for menu item on mobile
   $('.fa-solid.fa-bars').on('click', function () {
-    console.log('Menu item was clicked!')
 
     if (isSubmenuVisible) {
       $('.menuItems').fadeOut(); // Hide submenu
@@ -18,8 +16,8 @@ $(document).ready(function() {
 
   // Close menu if click is outside the menu
   $(document).on('click', function (e) {
-    console.log('Clicked outside:', e.target);
-    if (!$(e.target).closest('.fa-bars, .menuItems').length) {
+    // If user clicks outside of the menu on mobile, the menu closes
+    if (!$(e.target).closest('.fa-bars, .menuItems').length && visualViewport < 961) {
       $('.menuItems').fadeOut();
       isSubmenuVisible = false;
     }
