@@ -8,8 +8,7 @@ CREATE TABLE messages (
   item_id INT,
   content TEXT NOT NULL,
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  status VARCHAR(50),
-  type VARCHAR(50),
+  isRead BOOLEAN,
   FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE
