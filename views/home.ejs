@@ -14,25 +14,7 @@
   <script defer src="/scripts/items.js"></script>
 </head>
 <body>
-  <nav>
-    <img class="crafthubLogo" src="/docs/CraftHub Logo white.png" alt="CraftHub logo in the colour white">
-    <!-- If user is logged in -->
-    <% if (currentUser) { %>
-      <div class="loginTrue">
-        <p>'My Favourites' will display - user logged in</p>
-      </div>
-    <% } else { %>
-      <!-- If user is not logged in -->
-      <div class="loginFalse">
-        <!-- <a>Login:</a> -->
-        <form class="loginForm" method="POST" action="/login">
-          <input class="userId" name="userId" placeholder="UserID">
-          <input class="loginButton" type="submit" value="Login">
-        </form>
-      </div>
-    <% } %>
-  </nav>
-  <div class="search-bar">
+<%- include('partials/_nav') %>  <div class="search-bar">
     <input type="text" placeholder="Search...">
     <i class="search-icon">🔍</i>
   </div>
