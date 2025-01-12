@@ -35,7 +35,7 @@ const userLookup = (userID) => {
     .catch((err) => {
       console.error('Error querying user:', err);
       throw err; // throw the error for handling in the calling function
-  });
+    });
 };
 
 // On successful "login" user is redirected to main page to display logged in menu options
@@ -52,18 +52,20 @@ router.post('/', (req, res) => {
     // Check if user exists in DB
     if (!user) return res.status(400).send(`A user with ID ${userId} does not exist.`);
 
+
+    // set cookie for username
+    req.session.username = user.name;
     // If user exists, save cookie as 1 - admin, 2 - buyer
-    if (user.is_admin) req.session.user_status = 1;
-    else req.session.user_status = 2;
+    user.is_admin ? req.session.user_status = 1  : req.session.user_status = 2;
 
     // redirect to root page
     res.redirect('/');
   })
-  .catch((err) => {
+    .catch((err) => {
     // Handle any errors that occur during async lookup
-    console.log('Error during user lookup: ', err);
-    res.status(500).send('An error occured during login.');
-  })
+      console.log('Error during user lookup: ', err);
+      res.status(500).send('An error occured during login.');
+    });
 });
 
 module.exports = router;

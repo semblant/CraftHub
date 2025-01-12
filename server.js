@@ -66,12 +66,6 @@ app.use('/', homeRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  // Store user info
-  const currentUser = req.session.user_status;
-  const templateVars = {
-    currentUser
-  };
-
   res.render('home', templateVars);
 });
 

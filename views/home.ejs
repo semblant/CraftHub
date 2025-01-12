@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title>Home</title>
-
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-
-  <!-- External CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/nav.css" />
-
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css">
+  <link rel="stylesheet" href="/vendor/border-box.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/nav.css">
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/items.js"></script>
-  <script defer src="/scripts/app.js"></script>
-
-
 </head>
-
 <body>
-  <!-- Include the header from 'partials' -->
+  <!-- Include Partials header -->
   <%- include('partials/_nav') %>
-
-  <h1>Products</h1>
-  <ul id="items"></ul>
+<div class="search-bar">
+    <input type="text" placeholder="Search...">
+    <i class="search-icon">🔍</i>
+  </div>
+  <div class="background-layer"></div>
+  <div class="filter-buttons">
+    <button class="filter-button">
+      <i class="filter-icon">🔍</i>
+      <i class="price-icon">$</i>
+    </button>
+    <button class="filter-button">
+      <i class="filter-icon">🔍</i>
+      <i class="heart-icon">❤️</i>
+    </button>
+  </div>
+  <div class="product-listings">
+    <% items.forEach(item => { %>
+      <div class="product">
+        <div class="product-header">
+          <span class="product-title"><%= item.title %></span>
+          <span class="product-price">$<%= item.price %></span>
+        </div>
+        <img src="<%= item.image_url %>" alt="<%= item.title %>">
+        <div class="product-footer">
+          <span class="user-name"><%= item.username %></span>
+          <button class="chat-button">💬</button>
+        </div>
+        <i class="favorite-icon">❤️</i>
+      </div>
+    <% }) %>
+  </div>
+  <button class="back-to-top">⬆️</button>
+  <button class="chat-button">
+    💬
+    <div class="notification">1</div>
+  </button>
 </body>
-
 </html>
