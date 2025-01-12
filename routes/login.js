@@ -55,6 +55,8 @@ router.post('/', (req, res) => {
 
     // set cookie for username
     req.session.username = user.name;
+    //set cookie for userID
+    req.session.user_id = user.id
     // If user exists, save cookie as 1 - admin, 2 - buyer
     user.is_admin ? req.session.user_status = 1  : req.session.user_status = 2;
 
