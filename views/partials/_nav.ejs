@@ -11,7 +11,11 @@
       <!-- STRETCH FEATURE <li>My Listings</li> -->
       <li class="messages"><a href="/messages">Messages</a></li>
       <!-- Filter instead? <li>My Favourites</li> -->
-      <li class="logout"><form method="POST" action="/logout">Logout</form></li>
+      <li class="logout">
+        <form method="POST" action="/logout">
+          <button type="submit">Logout</button>
+        </form>
+      </li>
     </div>
     <% } else { %>
     <!-- If user is not logged in display login form  -->
