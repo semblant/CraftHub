@@ -7,11 +7,11 @@
     <i class="fa-solid fa-bars"></i>
     <div class="menuItems">
       <li class="loginTrue">Hello "<%= name%>"!</li>
-      <li>Create Listing</li>
+      <li class="createListing"><a href="/create-listing">Create Listing</a></li></form>
       <!-- STRETCH FEATURE <li>My Listings</li> -->
-      <li>Messages</li>
+      <li class="messages"><a href="/messages">Messages</a></li>
       <!-- Filter instead? <li>My Favourites</li> -->
-      <li>Logout</li>
+      <li class="logout"><form method="POST" action="/logout">Logout</form></li>
     </div>
     <% } else { %>
     <!-- If user is not logged in display login form  -->

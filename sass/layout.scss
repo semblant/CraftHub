@@ -49,4 +49,17 @@ html {
       padding-right: 10px;
     }
   }
+
+  li a {
+    text-decoration: none;
+    color: base.$header-text-colour
+  }
+
+  li a:hover {
+    color: base.$primary-border-color;
+  }
+
+  li:not(:first-child):hover {
+    color: base.$primary-border-color;
+  }
 }
