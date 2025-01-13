@@ -48,6 +48,11 @@ nav {
   gap: 24px;
 }
 
+.filter-button-price:hover,
+.filter-button-favorites:hover {
+  cursor: pointer;
+}
+
 .filter-button-price,
 .filter-button-favorites {
   width: 73px;
@@ -79,6 +84,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
 
 .product img {
@@ -106,7 +112,7 @@ nav {
 }
 
 .product .favorite-icon:hover {
-  color: #ED3D2C;
+  color: #4768fa;
 }
 
 .back-to-top {

@@ -14,14 +14,14 @@ $(() => {
           <p>${item.description}</p>
           <p>Price: $${item.price}</p>
           <img src="${item.image_url}" alt="${item.title}">
-          <button class="favorite-button" data-item-id="${item.id}">❤️</button>
+          <i class="favorite-icon fa-solid fa-heart" data-item-id="${item.id}" style="color: #ff0000;"></i>
         </li>
       `);
       $itemsList.append($item);
     }
 
-    // Add event listener for favoriting an item
-    $('.favorite-button').on('click', function() {
+    // Event delegation for favoriting an item
+    $itemsList.on('click', '.favorite-icon', function() {
       const itemId = $(this).data('item-id');
       $.ajax({
         method: 'POST',

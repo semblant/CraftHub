@@ -25,25 +25,31 @@ router.get('/filter/price', (req, res) => {
     });
 });
 
-// Get favorited items for a user
-router.get('/favorites', (req, res) => {
+// Favorite an item
+router.post('/:itemId/favorite', (req, res) => {
   const userId = req.session.user_id;
-  itemQueries.getFavoritedItems(userId)
-    .then(items => {
-      res.json({ items });
+  const itemId = req.params.itemId;
+  if (!userId) {
+    return res.status(401).json({ error: 'User not logged in' });
+  }
+  itemQueries.favoriteItem(userId, itemId)
+    .then(item => {
+      res.json({ item });
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
 });
 
-// Favorite an item
-router.post('/:itemId/favorite', (req, res) => {
+// Get favorited items for a user
+router.get('/favorites', (req, res) => {
   const userId = req.session.user_id;
-  const itemId = req.params.itemId;
-  itemQueries.favoriteItem(userId, itemId)
-    .then(item => {
-      res.json({ item });
+  if (!userId) {
+    return res.status(401).json({ error: 'User not logged in' });
+  }
+  itemQueries.getFavoritedItems(userId)
+    .then(items => {
+      res.json({ items });
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
