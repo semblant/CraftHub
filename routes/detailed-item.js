@@ -11,10 +11,6 @@ const removeItem = function(itemId, userId) {
   ;
   `;
   return db.query(query, [itemId, userId])
-  .then((data) => {
-    console.log(data.rows)
-    console.log('Item Deleted')
-  })
   .catch((err) => {
     console.log('An error occurred during item lookup.', err);
     res.send(500).status('Error during item lookup.')
@@ -24,22 +20,41 @@ const removeItem = function(itemId, userId) {
 // Dynamic route to delete an item from the databse
 router.post('/:id/delete', (req, res) => {
   // Store user info
-  const currentUser = req.session.user_status ? req.session.user_status : null;
-  const currentUserId = req.session.userId
-
-  // Validate User
-  if (!currentUserId || currentUser !== 1) return res.status(403).send('Unauthorized access')
+  const currentUserId = Number(req.session.userId);
 
   // Store item info
   const itemId = req.params.id;
+  const item = itemLookup(itemId);
 
-  // Execute query to delete item from table(s)
-  const removed = removeItem(itemId, currentUser)
+  // Lookup item to get userID that created it
+  item.then((data) => {
+    console.log(data)
+    itemCreatorId = data.user_id;
 
-  removed.then(()=> {
+    // Validate User
+    if (!currentUserId || currentUserId !== itemCreatorId) return res.status(403).send('Unauthorized access')
+
+    // Execute query to delete item from table(s)
+    const removed = removeItem(itemId, currentUserId)
+    removed.then(()=> {
     res.redirect('/'); // redirect once complete
-  })
+    });
+  });
 });
+
+// move to helpers
+const markAsSold = function(itemId) {
+  const query = `
+  UPDATE items
+  SET status = 'Sold'
+  WHERE id = $1;
+  `
+  return db.query(query, [itemId])
+  .catch((err) => {
+    console.log('An error occurred during item update', err);
+    res.status(500).send('Error during item update');
+  })
+};
 
 // move to helpers
 const itemLookup = function(itemId) {
@@ -54,6 +69,37 @@ const itemLookup = function(itemId) {
     return data.rows[0];
   })
 };
+
+// Dynamic route to update item status to SOLD
+router.post('/:id', (req, res) => {
+  // Store user info
+  const currentUserId = Number(req.session.userId);
+
+  // Store item info
+  const itemId = req.params.id;
+  let itemCreatorId = null;
+  const item = itemLookup(itemId);
+
+  // Lookup item to get userID that created it
+  item.then((data) => {
+    console.log(data)
+    itemCreatorId = data.user_id;
+
+    console.log('stored info:', itemCreatorId, currentUserId)
+
+    // Validate User
+    if (!currentUserId || currentUserId !== itemCreatorId) return res.status(403).send('Unauthorized access')
+
+    // Else mark item as sold
+    const sellItem = markAsSold(itemId);
+    sellItem.then(() =>{
+    res.redirect('/');
+    })
+  })
+
+
+});
+
 
 router.get('/:id', (req, res) => {
   // Store User info
@@ -79,9 +125,6 @@ router.get('/:id', (req, res) => {
       createUserId: item.user_id,
       images: item.image_url
     };
-
-    console.log(templateVars)
-
     res.render('detailed-item', templateVars);
   })
 });

@@ -54,7 +54,7 @@
       <p>To contact this seller, please login!</p>
     <% } else if (currentUserId === createUserId) { %>
       <!-- Handled by AJAX and route -->
-      <form method="POST" action="/<%= id %>?_method=PUT"><input class="sellItem" type="submit" value="Mark Item as Sold"></form>
+      <form method="POST" action="/detailed-item/<%= id %>"><input class="sellItem" type="submit" value="Mark Item as Sold"></form>
       <form method="POST" action="/detailed-item/<%= id %>/delete"><input class="removeItem" type="submit" value="Remove Item"></form>
     <% } else if (currentUserId !== createUserId) { %>
       <!-- 'Contact Seller' href will change once we know how each message is tracked by userID(s) and itemID  -->
