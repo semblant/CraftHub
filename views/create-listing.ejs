@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css">
+  <link rel="stylesheet" href="/vendor/border-box.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/nav.css">
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/items.js"></script>
+</head>
+<body>
+  <!-- Include Partials header -->
+  <%- include('partials/_nav') %>
+  <h1>Create Listing</h1>
+  <form method="POST" action="/create-listing">
+    <label>Title</label>
+    <input type="text" id="title" name="title">
+    <label>Price</label>
+    <input type="text" id="price" name="price">
+    <label>Description</label>
+    <input type="text" id="description" name="description">
+    <label>Images</label>
+    <input id="images" name="images">
+    <input type="submit" value="Publish">
+  </form>
+</body>
+</html>
