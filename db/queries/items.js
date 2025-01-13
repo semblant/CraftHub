@@ -39,4 +39,18 @@ const getFavoritedItems = (userId) => {
     });
 };
 
-module.exports = { getItemsWithImages };
+const favoriteItem = (userId, itemId) => {
+  const query = `
+    INSERT INTO favorites (user_id, item_id, is_active)
+    VALUES ($1, $2, true)
+    ON CONFLICT (user_id, item_id)
+    DO UPDATE SET is_active = NOT favorites.is_active
+    RETURNING *;
+  `;
+  return db.query(query, [userId, itemId])
+    .then(data => {
+      return data.rows[0];
+    });
+};
+
+module.exports = { getItemsWithImages, getItemsByPrice, getFavoritedItems, favoriteItem };

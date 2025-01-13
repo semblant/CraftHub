@@ -37,4 +37,17 @@ router.get('/favorites', (req, res) => {
     });
 });
 
+// Favorite an item
+router.post('/:itemId/favorite', (req, res) => {
+  const userId = req.session.user_id;
+  const itemId = req.params.itemId;
+  itemQueries.favoriteItem(userId, itemId)
+    .then(item => {
+      res.json({ item });
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 module.exports = router;

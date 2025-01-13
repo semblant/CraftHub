@@ -14,24 +14,22 @@ $(() => {
           <p>${item.description}</p>
           <p>Price: $${item.price}</p>
           <img src="${item.image_url}" alt="${item.title}">
+          <button class="favorite-button" data-item-id="${item.id}">❤️</button>
         </li>
       `);
       $itemsList.append($item);
     }
+
+    // Add event listener for favoriting an item
+    $('.favorite-button').on('click', function() {
+      const itemId = $(this).data('item-id');
+      $.ajax({
+        method: 'POST',
+        url: `/api/items/${itemId}/favorite`
+      })
+      .done((response) => {
+        alert('Item favorited!');
+      });
+    });
   });
 });
-
-  // Show back-to-top button on scroll
-  $(window).scroll(() => {
-    if ($(window).scrollTop() > 100) {
-      $('.back-to-top').fadeIn();
-    } else {
-      $('.back-to-top').fadeOut();
-    }
-  });
-
-  // Scroll to top on back-to-top button click
-  $('.back-to-top').click(() => {
-    $('html, body').animate({ scrollTop: 0 }, 'slow');
-    return false;
-  });

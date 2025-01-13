@@ -157,12 +157,15 @@ nav {
 }
 
 .background-layer {
-  position: absolute;
+  position: fixed;
   top: 0;
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: 98%;
+  border-bottom-right-radius: 12%;
+  border-bottom-left-radius: 12%;
   background-color: base.$secondary-background-color;
   z-index: -1;
+
 }
 
 @media (max-width: 390px) {
