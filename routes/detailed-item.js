@@ -25,6 +25,11 @@ const removeItem = function(itemId, userId) {
 router.post('/:id/delete', (req, res) => {
   // Store user info
   const currentUser = req.session.user_status ? req.session.user_status : null;
+  const currentUserId = req.session.userId
+
+  // Validate User
+  if (!currentUserId || currentUser !== 1) return res.status(403).send('Unauthorized access')
+
   // Store item info
   const itemId = req.params.id;
 
