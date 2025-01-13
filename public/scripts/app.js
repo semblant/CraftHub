@@ -3,7 +3,8 @@
 
 $(document).ready(function() {
   let isSubmenuVisible = false; // Track submenu visibility
-  // Add event listener for menu item on mobile
+
+  // Add event listener for menu icon on mobile
   $('.fa-solid.fa-bars').on('click', function () {
 
     if (isSubmenuVisible) {
@@ -22,4 +23,5 @@ $(document).ready(function() {
       isSubmenuVisible = false;
     }
   });
+
 });
