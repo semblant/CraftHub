@@ -4,12 +4,12 @@ $(() => {
       method: 'GET',
       url: url
     })
-    .done((response) => {
-      const $itemsList = $('.product-listings');
-      $itemsList.empty();
+      .done((response) => {
+        const $itemsList = $('.product-listings');
+        $itemsList.empty();
 
-      for (const item of response.items) {
-        const $item = $(`
+        for (const item of response.items) {
+          const $item = $(`
           <div class="product">
             <div class="product-header">
               <span class="product-title">${item.title}</span>
@@ -20,12 +20,32 @@ $(() => {
               <span class="user-name">${item.username}</span>
               <button class="chat-button">💬</button>
             </div>
-            <i class="favorite-icon">❤️</i>
+            <i class="favorite-icon fa-solid fa-heart" data-item-id="${item.id}" style="color: #ff0000;"></i>
           </div>
         `);
-        $itemsList.append($item);
-      }
-    });
+          $itemsList.append($item);
+        }
+
+
+        // Event delegation for favoriting an item
+        $itemsList.on('click', '.favorite-icon', function() {
+          const itemId = $(this).data('item-id');
+          $.ajax({
+            method: 'POST',
+            url: `/api/items/${itemId}/favorite`
+          })
+            .done((response) => {
+              alert('Item favorited!');
+            })
+            .fail((jqXHR) => {
+              if (jqXHR.status === 401) {
+                alert('Please log in to favorite items.');
+              } else {
+                alert('An error occurred. Please try again.');
+              }
+            });
+        });
+      });
   };
 
   // Filter items by price

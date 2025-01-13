@@ -36,13 +36,6 @@ app.use(cookieSession({
   keys: ['keys1'],
 }));
 
-// Example login route to set user_id in session
-app.post('/login', (req, res) => {
-  const userId = 2; // Replace with actual user ID from database
-  req.session.user_id = userId;
-  res.redirect('/');
-});
-
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
