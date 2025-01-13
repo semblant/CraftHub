@@ -1,7 +1,5 @@
 /* All routes for 'Create Listing' are defined here
 */
-
-
 const express = require('express');
 const db = require('../db/connection');
 const router  = express.Router();
@@ -26,22 +24,43 @@ router.get('/', (req, res) => {
  * @param {Object} item - the item to add to the database with fields: title, description, price, create user, etc.
  */
 const createItem = function(item)  {
+  console.log('item details: ', item)
   const query = `INSERT INTO items (title, description, price, category_id, status, user_id)
-  VALUES ($1, $2, $3, $4, $5, $6)`;
+  VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`; // return item ID to use in addImages function
   const values = [item.itemTitle, item.itemDescription, item.itemPrice, 1, 'Available', item.userID]
-  console.log('createitem function values: ', values)
 
   // Add item to 'items' table
   db.query(query, values)
+  .then((itemData) => {
+    const itemId = itemData.rows[0].id // store item ID from RETURNING data
+  // Add images to DB
+    addImages(itemId, item.itemImages);
+  })
   .catch((err) => {
     console.log('Error with item creation', err);
     res.status(500).send('An error occured during item creation.');
-  })
-
-
+  });
 }
 
-// for images, once item is created ID will auto create, need to query to get item ID then add images with same item ID
+/**
+ * Uses provided item ID to add associated images to database
+ *
+ * @param {Number} id - item ID to add to 'item_images' database
+ * @param {String} images - URLs to add to 'item_images' database
+ * @returns nothing???
+ */
+const addImages = function(id, images) {
+  const query = `
+  INSERT INTO item_images (item_id, image_url)
+  VALUES ($1, $2);`;
+  values = [id, images];
+
+  return db.query(query, values)
+  .catch((err) => {
+    console.log('An error occured during image addition', err);
+    res.status(500).send('An error occured during item creation');
+  })
+}
 
 
 // Post method handles creating a listing, posts to route '/create-listing/'
@@ -56,20 +75,13 @@ router.post('/', (req, res) => {
   const itemImages = req.body.images;
 
   // Store user ID
-  const userID = req.session.user_id
+  const userID = req.session.userId
 
-  // Debug
-  console.log('itemTitle', itemTitle);
-  console.log('itemPrice', itemPrice);
-  console.log('itemDescription', itemDescription);
-  console.log('itemImages', itemImages);
-
+  console.log(userID)
   // Add listing to DB
   const item = {itemTitle, itemPrice, itemDescription, itemImages, userID}
-  console.log('inside post route item: ', item);
   createItem(item)
-  //.catch((err) => console.log('There was an error creating the listing.'))
-
+  res.redirect('/');
 });
 
 
