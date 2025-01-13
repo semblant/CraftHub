@@ -9,7 +9,9 @@ const express = require('express');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
-  res.render('messages');
+  const currentUser = req.session.user_status ? req.session.user_status : null;
+  const name = req.session.username
+  res.render('messages', { currentUser, name });
 });
 
 module.exports = router;
