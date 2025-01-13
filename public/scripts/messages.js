@@ -21,7 +21,7 @@ $(document).ready(() => {
         alert('Failed to send message.');
         console.error(error);
       })
- 
-  
   });
+
+  
 });

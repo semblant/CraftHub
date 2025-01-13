@@ -19,20 +19,30 @@
 
   <%- include('partials/_nav') %>
 
-  <section id="messaging-container">
+  <div id="messaging-container">
 
     <!-- Sidebar for conversations-->
-     <div class="conversation-list">
-
-     </div>
+    <aside class="message-list">
+      <h2>Conversations</h2>
+      <ul>Example</ul>
+    </aside>
 
      <!-- Chat Window -->
-     <div class="chat-window">
+    <section class="message-area">
+      <header class="message-header">
+        <h2>Conversation</h2>
+      </header>
+      <div class="active-messages">
+        <!-- Messages here -->
+      </div>
+      
       <form id="message-form">
-        <textarea id="message-content" placeholder="Type your message..." required></textarea>
-        <button id="chat-submit" type="submit">Send</button>
+        <div class="message-box">
+          <textarea id="message-content" placeholder="Type your message..." required></textarea>
+          <button id="chat-submit" type="submit">Send</button>
+        </div>
       </form>
-     </div>
-  </section>
+    </section>
+    </div>
 </body>
 </html>

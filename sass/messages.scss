@@ -1,2 +1,86 @@
 @use 'base';
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  margin: 0;
+  padding-top: 100px;
+  min-height: 100vh;
+  justify-content: center;
+  background-color: base.$background-colour;
+}
+
+.messaging-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-list {
+  background-color: base.$secondary-background-color;
+  border-radius: 8px;
+  padding: 6px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  height: 30%;
+  width: 100%;
+}
+
+.message-area {
+  background-color: base.$secondary-background-color;
+  padding: 10px;
+  border-radius: 8px;
+  height: 65%;
+  width: 100%;
+}
+
+.message-box {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+#message-content {
+  padding: 5px;
+  width: 100%;
+  height: 100px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#chat-submit {
+  margin-left: 5px;
+  border-radius: 8px;
+  color: white;
+  background-color: base.$button-color;
+  border: 1px solid 333;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+#chat-submit:hover {
+  filter: brightness(80%);
+}
+
+
+
+@media (min-width: 768px) {
+  .messaging-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .message-list {
+    width: 30%;
+    margin-bottom: 0;
+  }
+
+  .message-area {
+    width: 65%;
+  }
+}
