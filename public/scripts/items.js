@@ -19,24 +19,8 @@ $(() => {
         `);
         $itemsList.append($item);
       }
-
-      // Event delegation for favoriting an item
-      $itemsList.on('click', '.favorite-icon', function() {
-        const itemId = $(this).data('item-id');
-        $.ajax({
-          method: 'POST',
-          url: `/api/items/${itemId}/favorite`
-        })
-          .done((response) => {
-            alert('Item favorited!');
-          })
-          .fail((jqXHR) => {
-            if (jqXHR.status === 401) {
-              alert('Please log in to favorite items.');
-            } else {
-              alert('An error occurred. Please try again.');
-            }
-          });
-      });
+    })
+    .fail(() => {
+      alert('Failed to fetch items. Please try again later.');
     });
 });
