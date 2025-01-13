@@ -7,12 +7,9 @@ const router  = express.Router();
 
 // On 'logout' clear cookies
 router.post('/', (req, res) => {
-
-  console.log('attempting')
   //Clear cookies
   req.session = null;
   res.redirect('/');
-
 });
 
 module.exports = router;

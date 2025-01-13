@@ -37,12 +37,7 @@ const createItem = function(item)  {
     console.log('Error with item creation', err);
     res.status(500).send('An error occured during item creation.');
   })
-
-
 }
-
-// for images, once item is created ID will auto create, need to query to get item ID then add images with same item ID
-
 
 // Post method handles creating a listing, posts to route '/create-listing/'
 router.post('/', (req, res) => {
