@@ -58,7 +58,7 @@ const itemLookup = function(itemId) {
 router.get('/:id', (req, res) => {
   // Store User info
   const currentUser = req.session.user_status ? req.session.user_status : null; //checks if user is admin
-  const currentUserId = req.session.userid ? req.session.userId : null;
+  const currentUserId = req.session.userId ? Number(req.session.userId) : null;
   const name = req.session.username;
 
   // Store item information
@@ -79,6 +79,8 @@ router.get('/:id', (req, res) => {
       createUserId: item.user_id,
       images: item.image_url
     };
+
+    console.log(templateVars)
 
     res.render('detailed-item', templateVars);
   })
