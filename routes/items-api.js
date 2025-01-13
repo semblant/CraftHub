@@ -27,7 +27,7 @@ router.get('/filter/price', (req, res) => {
 
 // Favorite an item
 router.post('/:itemId/favorite', (req, res) => {
-  const userId = req.session.user_id;
+  const userId = req.session.userId;
   const itemId = req.params.itemId;
   if (!userId) {
     return res.status(401).json({ error: 'User not logged in' });
@@ -43,7 +43,7 @@ router.post('/:itemId/favorite', (req, res) => {
 
 // Get favorited items for a user
 router.get('/favorites', (req, res) => {
-  const userId = req.session.user_id;
+  const userId = req.session.userId;
   if (!userId) {
     return res.status(401).json({ error: 'User not logged in' });
   }

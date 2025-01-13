@@ -5,11 +5,11 @@ async function toggleFavorite(itemId) {
       credentials: 'same-origin' // Ensures cookies are sent with the request
     });
     const data = await response.json();
-    console.log(data); // Debugging the response
     if (response.ok) {
-      alert(data.message);
       const heartIcon = document.querySelector(`.favorite-icon[data-item-id="${itemId}"]`);
-      heartIcon.style.color = heartIcon.style.color === 'red' ? 'black' : 'red';
+      const isFavorited = heartIcon.style.color === 'red';
+      heartIcon.style.color = isFavorited ? '#414141' : 'red'; // Toggle between red and gray/black
+      alert(isFavorited ? 'Product Unfavorited' : 'Product Favorited'); // Alternate message
     } else {
       alert(data.error || 'Failed to toggle favorite');
     }

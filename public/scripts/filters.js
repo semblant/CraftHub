@@ -17,7 +17,6 @@ $(() => {
             </div>
             <img src="${item.image_url}" alt="${item.title}">
             <div class="product-footer">
-              <span class="user-name">${item.username}</span>
               <button class="chat-button">💬</button>
             </div>
             <i class="favorite-icon fa-solid fa-heart" data-item-id="${item.id}" style="color: #ff0000;"></i>
@@ -35,8 +34,10 @@ $(() => {
     });
 
     // Filter favorited items
+    $('.filter-button-favorites').click(() => {
+      fetchItems('/api/items/favorites');
+    });
   };
-  $('.filter-button-favorites').click(() => {
-    fetchItems('/api/items/favorites');
-  });
+
+  fetchItems('/api/items'); // Initial fetch to load all items
 });

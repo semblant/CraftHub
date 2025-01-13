@@ -33,16 +33,16 @@ const createItem = function(item)  {
 
   // Add item to 'items' table
   db.query(query, values)
-  .then((itemData) => {
-    const itemId = itemData.rows[0].id // store item ID from RETURNING data
-  // Add images to DB
-    addImages(itemId, item.itemImages);
-  })
-  .catch((err) => {
-    console.log('Error with item creation', err);
-    res.status(500).send('An error occured during item creation.');
-  });
-}
+    .then((itemData) => {
+      const itemId = itemData.rows[0].id // store item ID from RETURNING data
+      // Add images to DB
+      addImages(itemId, item.itemImages);
+    })
+    .catch((err) => {
+      console.log('Error with item creation', err);
+      res.status(500).send('An error occured during item creation.');
+    });
+};
 
 /**
  * Uses provided item ID to add associated images to database
@@ -58,10 +58,10 @@ const addImages = function(id, images) {
   values = [id, images];
 
   return db.query(query, values)
-  .catch((err) => {
-    console.log('An error occured during image addition', err);
-    res.status(500).send('An error occured during item creation');
-  })
+    .catch((err) => {
+      console.log('An error occured during image addition', err);
+      res.status(500).send('An error occured during item creation');
+    })
 }
 
 // Post method handles creating a listing, posts to route '/create-listing/'
