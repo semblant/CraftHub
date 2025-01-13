@@ -19,6 +19,7 @@ $(() => {
       $itemsList.append($item);
     }
   });
+});
 
   // Show back-to-top button on scroll
   $(window).scroll(() => {
@@ -34,4 +35,3 @@ $(() => {
     $('html, body').animate({ scrollTop: 0 }, 'slow');
     return false;
   });
-});
