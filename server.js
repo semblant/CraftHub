@@ -53,6 +53,8 @@ const itemsApiRoutes = require('./routes/items-api');
 const homeRoutes = require('./routes/home');
 const createListingRoutes = require('./routes/create-listing');
 const logoutRoutes = require('./routes/logout');
+const detailedItemRoutes = require('./routes/detailed-item');
+
 
 
 
@@ -67,6 +69,9 @@ app.use('/api/items', itemsApiRoutes);
 app.use('/', homeRoutes);
 app.use('/create-listing', createListingRoutes);
 app.use('/logout', logoutRoutes);
+app.use('/:id', detailedItemRoutes);
+
+
 
 
 // Note: mount other resources here, using the same pattern above

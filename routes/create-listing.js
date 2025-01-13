@@ -6,13 +6,15 @@ const router  = express.Router();
 
 // Get method renders 'Create Listing' page
 router.get('/', (req, res) => {
-  // Make sure user is Admin user (is_admin: 1), else redirect them back to home page
-  const isAdmin = req.session.user_status;
-  if (isAdmin === 2) return res.redirect('../'); // Redirect back to home page
-
   // Store user information
   const currentUser = req.session.user_status ? req.session.user_status : null;
-  const name = req.session.username
+  const name = req.session.username;
+  const currentUserId = req.session.userId;
+
+  // Validate User
+  if (!currentUserId || currentUser !== 1) return res.status(403).send('Unauthorized access') // Handle command injection
+  if (isAdmin === 2) return res.redirect('../'); // Redirect back to home page when clicked -- gonna get rid of this by including it in html instead
+
   res.render('create-listing', {currentUser, name});
 });
 
@@ -62,9 +64,16 @@ const addImages = function(id, images) {
   })
 }
 
-
 // Post method handles creating a listing, posts to route '/create-listing/'
 router.post('/', (req, res) => {
+  // Store user ID
+  const currentUserId = req.session.userId
+  const currentUser = req.session.user_status; // store 1 - admin user or 2 - regular user
+  console.log('store user info - admin, ID: ', currentUser, currentUserId)
+
+  // Validate User
+  if (!currentUserId || currentUser !== 1) return res.status(403).send('Unauthorized access') // Handle command injection
+
   // Make fields required
   if (!req.body.title || !req.body.price || !req.body.description || !req.body.images) return res.status(400).send(`Fields cannot be blank`)
 
@@ -74,12 +83,9 @@ router.post('/', (req, res) => {
   const itemDescription = req.body.description
   const itemImages = req.body.images;
 
-  // Store user ID
-  const userID = req.session.userId
 
-  console.log(userID)
   // Add listing to DB
-  const item = {itemTitle, itemPrice, itemDescription, itemImages, userID}
+  const item = {itemTitle, itemPrice, itemDescription, itemImages, currentUserId}
   createItem(item)
   res.redirect('/');
 });
