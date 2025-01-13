@@ -3,8 +3,10 @@ const router = express.Router();
 const db = require('../db/connection');
 
 router.get('/', (req, res) => {
-  const currentUser = req.session.user_status ? req.session.user_status : null;
+  // Store user info
+  const currentUser = req.session.user_status ? req.session.user_status : null; // checks if user is admin or not
   const name = req.session.username
+
   db.query(`
     SELECT items.*, users.name AS username, item_images.image_url
     FROM items

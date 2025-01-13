@@ -2,6 +2,39 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 
+//Move to helpers
+const removeItem = function(itemId, userId) {
+  const query = `
+  DELETE FROM items
+  WHERE items.id = $1
+  AND user_id IN (SELECT id FROM users WHERE users.id = $2)
+  ;
+  `;
+  return db.query(query, [itemId, userId])
+  .then((data) => {
+    console.log(data.rows)
+    console.log('Item Deleted')
+  })
+  .catch((err) => {
+    console.log('An error occurred during item lookup.', err);
+    res.send(500).status('Error during item lookup.')
+  })
+}
+
+// Dynamic route to delete an item from the databse
+router.post('/:id/delete', (req, res) => {
+  // Store user info
+  const currentUser = req.session.user_status ? req.session.user_status : null;
+  // Store item info
+  const itemId = req.params.id;
+
+  // Execute query to delete item from table(s)
+  const removed = removeItem(itemId, currentUser)
+
+  removed.then(()=> {
+    res.redirect('/'); // redirect once complete
+  })
+});
 
 // move to helpers
 const itemLookup = function(itemId) {
@@ -19,8 +52,9 @@ const itemLookup = function(itemId) {
 
 router.get('/:id', (req, res) => {
   // Store User info
-  const currentUser = req.session.user_status ? req.session.user_status : null;
-  const name = req.session.username
+  const currentUser = req.session.user_status ? req.session.user_status : null; //checks if user is admin
+  const currentUserId = req.session.userid ? req.session.userId : null;
+  const name = req.session.username;
 
   // Store item information
   const itemId = req.params.id;
@@ -29,20 +63,21 @@ router.get('/:id', (req, res) => {
   const item = itemLookup(itemId);
   item.then((item) =>{
     const templateVars = {
-      currentUser,
+      currentUserId,
       name,
+      currentUser, //admin status
       id: item.id,
       title: item.title,
       description: item.description,
       price: item.price,
       created: item.created_at,
-      userId: item.user_id,
+      createUserId: item.user_id,
       images: item.image_url
     };
 
     res.render('detailed-item', templateVars);
   })
-
 });
+
 
 module.exports = router;
