@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="/styles/nav.css">
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
-  <script defer src="/scripts/items.js"></script>
-  <script defer src="/scripts/filters.js"></script>
   <script defer src="/scripts/back-to-top.js"></script>
   <script defer src="/scripts/favorite-item.js"></script>
 </head>
@@ -47,7 +45,7 @@
         <div class="product-footer">
           <button class="chat-button"><i class="fa-regular fa-comment" style="color: #ffffff;"></i></button>
         </div>
-        <i class="favorite-icon" data-item-id="<%= item.id %>" onclick="toggleFavorite('<%= item.id %>')"></i>
+        <i class="favorite-icon fa-solid fa-heart" data-item-id="<%= item.id %>" style="color: #ff0000;"></i>
       </div>
     <% }) %>
   </div>
@@ -58,3 +56,4 @@
   </button>
 </body>
 </html>
+
