@@ -1,25 +1,29 @@
 const db = require('../connection');
 
-const getItemsWithImages = () => {
+const getItemsWithImages = (userId) => {
   const query = `
-    SELECT items.*, item_images.image_url
+    SELECT items.*, item_images.image_url,
+           COALESCE(favorites.is_active, false) AS is_favorited
     FROM items
-    LEFT JOIN item_images ON items.id = item_images.item_id;
+    LEFT JOIN item_images ON items.id = item_images.item_id
+    LEFT JOIN favorites ON items.id = favorites.item_id AND favorites.user_id = $1;
   `;
-  return db.query(query)
+  return db.query(query, [userId])
     .then(data => {
       return data.rows;
     });
 };
 
-const getItemsByPrice = (minPrice, maxPrice) => {
+const getItemsByPrice = (minPrice, maxPrice, userId) => {
   const query = `
-    SELECT items.*, item_images.image_url
+    SELECT items.*, item_images.image_url,
+           COALESCE(favorites.is_active, false) AS is_favorited
     FROM items
     LEFT JOIN item_images ON items.id = item_images.item_id
-    WHERE items.price BETWEEN $1 AND $2;
+    LEFT JOIN favorites ON items.id = favorites.item_id AND favorites.user_id = $1
+    WHERE items.price BETWEEN $2 AND $3;
   `;
-  return db.query(query, [minPrice, maxPrice])
+  return db.query(query, [userId, minPrice, maxPrice])
     .then(data => {
       return data.rows;
     });
@@ -27,7 +31,8 @@ const getItemsByPrice = (minPrice, maxPrice) => {
 
 const getFavoritedItems = (userId) => {
   const query = `
-    SELECT items.*, item_images.image_url
+    SELECT items.*, item_images.image_url,
+           COALESCE(favorites.is_active, false) AS is_favorited
     FROM items
     JOIN favorites ON items.id = favorites.item_id
     LEFT JOIN item_images ON items.id = item_images.item_id

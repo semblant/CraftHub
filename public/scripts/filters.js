@@ -42,5 +42,5 @@ $(() => {
     fetchItems('/api/items/favorites');
   });
 
-  fetchItems('/api/items');
+  fetchItems('/api/items'); // Initial fetch to load all items
 });
