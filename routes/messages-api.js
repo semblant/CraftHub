@@ -7,11 +7,23 @@
 
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/queries/messages');
+const userMessages = require('../db/queries/messages');
 const db = require('../db/connection');
 
 router.get('/', (req, res) => {
-  userQueries.getMessages()
+  const name = req.session.username
+  let senderId
+  let receiverId
+
+  if (name === 'Admin User') {
+    senderId = 1;
+    receiverId = 2;
+  } else {
+    senderId = 2;
+    receiverId = 1;
+  }
+
+  userMessages.getMessages(senderId, receiverId)
     .then(messages => {
       res.json({ messages });
     })
@@ -23,22 +35,37 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const [ content ] = req.body;
+
+  console.log(req.body.content);
+  const content = req.body.content;
   const userId = req.session.username;
 
   if (!userId) {
     return res.status(401).json({ error: 'User not logged in' });
   }
 
+  let senderId
+  let receiverId
+
+  if (userId === 'Admin User') {
+    senderId = 1;
+    receiverId = 2;
+  } else {
+    senderId = 2;
+    receiverId = 1;
+  }
+
+  console.log(senderId, 'senderId');
+  console.log(receiverId, 'receiverId');
   try {
     const query = `
-    INSERT INTO messages (sender_id, receiver_id, content)
-    VALUES ($1, $2, $3) RETURNING *;
+    INSERT INTO messages (sender_id, receiver_id, content, isRead)
+    VALUES ($1, $2, $3, $4) RETURNING *;
     `;
-    const values = [userId, req.body.receiver_id || 1, content];
+    const values = [senderId, receiverId, content, false];
     const result = await db.query(query, values);
 
-    res.status(201).json(result.row[0]);
+    res.status(201).json(result.rows[0]);
   } catch (error) {
     console.error('Error inserting message:', error);
     res.status(500).json({ error: 'Failed to send message' });

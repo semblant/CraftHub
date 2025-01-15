@@ -15,11 +15,14 @@ body {
   background-color: base.$background-colour;
 }
 
+// Entire area which contains sidebar, chat window and text box for typing new messages
 .messaging-container {
   display: flex;
   flex-direction: column;
+  margin: 0;
 }
 
+// Sidebar or conversation list
 .message-list {
   background-color: base.$secondary-background-color;
   border-radius: 8px;
@@ -30,6 +33,7 @@ body {
   width: 100%;
 }
 
+// Section which contains the message header for the current conversation, active messages (ongoing conversation), and the textbox
 .message-area {
   background-color: base.$secondary-background-color;
   padding: 10px;
@@ -38,12 +42,19 @@ body {
   width: 100%;
 }
 
-.message-box {
+// Chat area where conversation history should show and new messages should appear in
+.active-messages {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-end;
 }
 
+// New messages via scripts
+.message-sent {
+  border: 1px solid black; 
+}
+
+// Textbox for new messages
 #message-content {
   padding: 5px;
   width: 100%;
@@ -52,6 +63,7 @@ body {
   border: 1px solid #ccc;
 }
 
+// Send button for new messages
 #chat-submit {
   margin-left: 5px;
   border-radius: 8px;
@@ -66,7 +78,6 @@ body {
 #chat-submit:hover {
   filter: brightness(80%);
 }
-
 
 
 @media (min-width: 768px) {
