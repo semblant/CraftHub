@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css">
+  <link rel="stylesheet" href="/vendor/border-box.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/nav.css">
+
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <!-- not sure if we need this <script defer src="/scripts/item-actions.js"></script> -->
+
+</head>
+<body>
+  <!-- Include Partials header -->
+  <%- include('partials/_nav') %>
+
+  <div class="itemDetails">
+    <h1><%= title %></h1>
+    <h2>$<%= price %></h2>
+    <h3><%= name %></h3>
+    <img src="<%= images %>" alt="<%= title %>">
+    <p><%= description %></p>
+  </div>
+  <div class="itemActions">
+
+    <!-- Confirm choice menus - hidden -->
+    <div action="confirmChoiceMenus"></div>
+      <div class="menuText">
+        <p class="removeItemText" hidden>Are you sure you want to delete this item?</p>
+        <p class="soldItemText" hidden>Are you sure you want to mark this item as <strong>SOLD?</strong></p>
+      </div>
+      <div class="choiceAnswers" hidden>
+        <button class="yes" type="submit">Yes</button>
+        <button class="no" type="submit">No</button>
+      </div>
+
+    <!-- Item Options -- top section is using jquery scripts-->
+    <!-- 'Contact Seller' href will change once we know how each message is tracked by userID(s) and itemID  -->
+    <!-- <a href="../messages/:id"><input type="submit" value="Contact Seller"></a> -->
+
+    <!-- Handled by AJAX and route -->
+    <!--<input class="sellItem" type="submit" value="Mark Item as Sold"> -->
+    <!-- <input class="removeItem" type="submit" value="Remove Item"> -->
+
+    <!-- This section uses POST forms -->
+    <!-- Check if current user the creating user -->
+    <% if (!currentUserId) { %>
+      <p>To contact this seller, please login!</p>
+    <% } else if (currentUserId === createUserId) { %>
+      <!-- Handled by AJAX and route -->
+      <form method="POST" action="/detailed-item/<%= id %>"><input class="sellItem" type="submit" value="Mark Item as Sold"></form>
+      <form method="POST" action="/detailed-item/<%= id %>/delete"><input class="removeItem" type="submit" value="Remove Item"></form>
+    <% } else if (currentUserId !== createUserId) { %>
+      <!-- 'Contact Seller' href will change once we know how each message is tracked by userID(s) and itemID  -->
+      <a href="../messages/:id"><input type="submit" value="Contact Seller"></a>
+    <% } %>
+  </div>
+</body>
+</html>

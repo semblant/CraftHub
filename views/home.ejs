@@ -5,52 +5,55 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css">
   <link rel="stylesheet" href="/vendor/border-box.css">
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="stylesheet" href="/styles/layout.css">
   <link rel="stylesheet" href="/styles/nav.css">
   <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/items.js"></script>
+  <script defer src="/scripts/app.js"></script>
+  <script defer src="/scripts/back-to-top.js"></script>
+  <script defer src="/scripts/favorite-item.js"></script>
 </head>
 <body>
   <!-- Include Partials header -->
   <%- include('partials/_nav') %>
-<div class="search-bar">
+  <div class="search-bar">
     <input type="text" placeholder="Search...">
-    <i class="search-icon">🔍</i>
+    <i class="search-icon"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i></i>
   </div>
   <div class="background-layer"></div>
   <div class="filter-buttons">
-    <button class="filter-button">
-      <i class="filter-icon">🔍</i>
-      <i class="price-icon">$</i>
+    <button class="filter-button-price">
+      <i class="filter-icon"><i class="fa-solid fa-filter" style="color: #000000;"></i></i>
+      <i class="price-icon"><i class="fa-solid fa-dollar-sign" style="color: #000000;"></i></i>
     </button>
-    <button class="filter-button">
-      <i class="filter-icon">🔍</i>
-      <i class="heart-icon">❤️</i>
+    <button class="filter-button-favorites">
+      <i class="filter-icon"><i class="fa-solid fa-filter" style="color: #000000;"></i></i>
+      <i class="heart-icon"><i class="fa-solid fa-heart" style="color: #ff0000;"></i></i>
     </button>
   </div>
   <div class="product-listings">
     <% items.forEach(item => { %>
       <div class="product">
         <div class="product-header">
-          <span class="product-title"><%= item.title %></span>
+          <a class="product-title" href="/detailed-item/<%= item.id %>"><%= item.title %></a>
           <span class="product-price">$<%= item.price %></span>
         </div>
         <img src="<%= item.image_url %>" alt="<%= item.title %>">
         <div class="product-footer">
-          <span class="user-name"><%= item.username %></span>
-          <button class="chat-button">💬</button>
+          <button class="chat-button"><i class="fa-regular fa-comment" style="color: #ffffff;"></i></button>
         </div>
-        <i class="favorite-icon">❤️</i>
+        <i class="favorite-icon fa-solid fa-heart" data-item-id="<%= item.id %>" style="color: #ff0000;"></i>
       </div>
     <% }) %>
   </div>
-  <button class="back-to-top">⬆️</button>
+  <button class="back-to-top"><i class="fa-solid fa-arrow-up" style="color: #ffffff;"></i></button>
   <button class="chat-button">
-    💬
+    <i class="fa-solid fa-pen" style="color: #ffffff;"></i>
     <div class="notification">1</div>
   </button>
 </body>
 </html>
+
