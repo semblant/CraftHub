@@ -7,9 +7,10 @@
 
 const express = require('express');
 const router  = express.Router();
-const userMessages = require('../db/queries/messages');
+const { getMessages } = require('../db/queries/messages');
 const db = require('../db/connection');
 
+// Get route for retrieving messages from database to show in chat window
 router.get('/', (req, res) => {
   const name = req.session.username
   let senderId
@@ -23,17 +24,21 @@ router.get('/', (req, res) => {
     receiverId = 1;
   }
 
-  userMessages.getMessages(senderId, receiverId)
+  getMessages(senderId, receiverId)
     .then(messages => {
-      res.json({ messages });
+      res
+        .status(200)
+        .json({ messages });
     })
     .catch(err => {
       res
         .status(500)
         .json({ error: err.message });
     });
+
 });
 
+// Post route for new sent messages
 router.post('/', async (req, res) => {
 
   console.log(req.body.content);
@@ -70,6 +75,40 @@ router.post('/', async (req, res) => {
     console.error('Error inserting message:', error);
     res.status(500).json({ error: 'Failed to send message' });
   }
+});
+
+// Get route for sidebar list
+router.get('/availableChat', (req, res) => {
+  const loggedInUser = req.session.username;
+  let otherUserId;
+
+  // Determine who is logged in and who the other user is
+  if (loggedInUser === 'Admin User') {
+    otherUserId = 2; // Buyer
+  } else {
+    otherUserId = 1; // Admin
+  }
+
+  // Fetch the most recent message between the two users
+  db.query(`
+    SELECT * FROM messages 
+    WHERE (sender_id = $1 AND receiver_id = $2) 
+       OR (sender_id = $2 AND receiver_id = $1)
+    ORDER BY timestamp DESC 
+    LIMIT 1;`, [loggedInUser === 'Admin User' ? 1 : 2, otherUserId])
+    .then(data => {
+      const latestMessage = data.rows[0];
+      const chatSidebarInfo = {
+        otherUserId: otherUserId,
+        lastMessage: latestMessage ? latestMessage.text : "No messages yet",
+        timestamp: latestMessage ? latestMessage.timestamp : null
+      };
+      res.json(chatSidebarInfo);  // Send the sidebar data to the client
+    })
+    .catch(err => {
+      console.error('Error fetching available chat:', err);
+      res.status(500).send('Error fetching available chat');
+    });
 });
 
 

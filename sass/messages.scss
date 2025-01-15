@@ -33,6 +33,16 @@ body {
   width: 100%;
 }
 
+// Sidebar conversations
+.chat-item {
+  background-color: #C4C2C2;
+  flex-direction: column;
+  align-self: flex-start;
+  padding: 4px;
+  border-radius: 8px;
+  margin: 3px;
+}
+
 // Section which contains the message header for the current conversation, active messages (ongoing conversation), and the textbox
 .message-area {
   background-color: base.$secondary-background-color;
@@ -49,9 +59,15 @@ body {
   align-items: flex-end;
 }
 
-// New messages via scripts
+// New messages via scripts as sender
 .message-sent {
-  border: 1px solid black; 
+  align-self: flex end;
+  background-color: #6E9ABA;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  max-width: 70%;
+  margin: 3px;
 }
 
 // Textbox for new messages
