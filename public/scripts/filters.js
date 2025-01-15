@@ -1,4 +1,9 @@
 $(() => {
+  let isPriceFilterActive = false;
+  let isFavoritesFilterActive = false;
+  let lastMinPrice = null;
+  let lastMaxPrice = null;
+
   const fetchItems = (url) => {
     $.ajax({
       method: 'GET',
@@ -32,15 +37,33 @@ $(() => {
 
   // Filter items by price
   $('.filter-button-price').click(() => {
-    const minPrice = prompt("Enter minimum price:");
-    const maxPrice = prompt("Enter maximum price:");
-    fetchItems(`/api/items/filter/price?minPrice=${minPrice}&maxPrice=${maxPrice}`);
+    if (isPriceFilterActive) {
+      fetchItems('/api/items');
+      isPriceFilterActive = false;
+    } else {
+      if (lastMinPrice === null || lastMaxPrice === null) {
+        lastMinPrice = prompt("Enter minimum price:");
+        lastMaxPrice = prompt("Enter maximum price:");
+      }
+      if (lastMinPrice !== null && lastMaxPrice !== null) {
+        fetchItems(`/api/items/filter/price?minPrice=${lastMinPrice}&maxPrice=${lastMaxPrice}`);
+        isPriceFilterActive = true;
+        isFavoritesFilterActive = false; // Reset other filter
+      }
+    }
   });
 
   // Filter favorited items
   $('.filter-button-favorites').click(() => {
-    fetchItems('/api/items/favorites');
+    if (isFavoritesFilterActive) {
+      fetchItems('/api/items');
+      isFavoritesFilterActive = false;
+    } else {
+      fetchItems('/api/items/favorites');
+      isFavoritesFilterActive = true;
+      isPriceFilterActive = false; // Reset other filter
+    }
   });
 
-  fetchItems('/api/items');
+  fetchItems('/api/items'); // Initial fetch to load all items
 });
