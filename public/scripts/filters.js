@@ -41,4 +41,6 @@ $(() => {
   $('.filter-button-favorites').click(() => {
     fetchItems('/api/items/favorites');
   });
+
+  fetchItems('/api/items');
 });
