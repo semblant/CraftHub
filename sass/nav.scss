@@ -97,3 +97,15 @@ nav {
 .loginButton:hover {
   box-shadow: base.$primary-border-color 2px 2px 2px 1px;
 }
+
+/* Logout Styling*/
+.logoutForm {
+  display: flex;
+  background-color: base.$header-colour;
+  border: none;
+  box-shadow: none;
+}
+
+.logoutButton {
+  all: unset; // remove automatic button style
+}
