@@ -24,7 +24,6 @@ $(() => {
             </div>
             <img src="${item.image_url}" alt="${item.title}">
             <div class="product-footer">
-              <button class="chat-button">💬</button>
             </div>
             <i class="favorite-icon fa-solid fa-heart" data-item-id="${item.id}" style="color: ${item.is_favorited ? 'red' : '#414141'};"></i>
           </div>
