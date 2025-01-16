@@ -98,7 +98,11 @@ nav {
   position: relative;
   box-sizing: border-box;
   background-color: base.$primary-border-color;
+  transition: transform 0.1s ease-out; // Fast animation
+  will-change: transform; // GPU optimization for smooth transitions
 }
+
+
 
 .product .product-title {
   @include base.product-title-styles;
@@ -159,6 +163,7 @@ nav {
   height: 48px;
   @include base.button-styles;
   display: none; /* Initially hidden */
+  transition: transform 0.3s;
 }
 
 .chat-button {
@@ -168,6 +173,7 @@ nav {
   width: 56px;
   height: 56px;
   @include base.button-styles;
+  transition: transform 0.3s;
 }
 
 .background-layer {
@@ -180,7 +186,30 @@ nav {
   z-index: -1;
 }
 
-@media (max-width: 390px) {
+@media (min-width: 439px) {
+
+  .filter-buttons {
+    position: fixed; /* Move filter buttons to nav bar */
+    margin-top: -4px;
+  }
+
+  .product-listings {
+    margin-top: 180px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 100px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .product {
+    margin: 10px;
+  }
+}
+
+@media (max-width: 439px) {
   .nav {
     .crafthubLogo {
       width: 132px;

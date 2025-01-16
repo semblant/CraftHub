@@ -17,6 +17,7 @@
   <script defer src="/scripts/back-to-top.js"></script>
   <script defer src="/scripts/favorite-item.js"></script>
   <script defer src="/scripts/filters.js"></script>
+  <script defer src="/scripts/product-tilt.js"></script>
 </head>
 <body>
   <!-- Include Partials header -->
@@ -41,18 +42,14 @@
           <span class="product-price">$<%= item.price %></span>
         </div>
         <img src="<%= item.image_url %>" alt="<%= item.title %>">
-        <div class="product-footer">
-          <button class="chat-button"><i class="fa-regular fa-comment" style="color: #ffffff;"></i></button>
-        </div>
+        <div class="product-footer"></div>
         <i class="favorite-icon fa-solid fa-heart" data-item-id="<%= item.id %>"></i>
       </div>
     <% }) %>
   </div>
   <button class="back-to-top"><i class="fa-solid fa-arrow-up" style="color: #ffffff;"></i></button>
-  <button class="chat-button">
-    <i class="fa-solid fa-pen"></i>
-    <!-- <div class="notification">1</div> -->
+  <button class="chat-button" onclick="window.location.href='/messages'">
+    <i class="fa-solid fa-comment" style="color: #ffffff;"></i>
   </button>
 </body>
 </html>
-
