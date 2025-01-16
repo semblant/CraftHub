@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
   const currentUser = req.session.user_status ? req.session.user_status : null; // checks if user is admin or not
   const name = req.session.username;
 
+  // Query to fetch items, their associated users, and images
   db.query(`
     SELECT items.*, users.name AS username, item_images.image_url
     FROM items
