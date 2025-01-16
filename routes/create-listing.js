@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
   // Validate User
   if (!currentUserId || currentUser !== 1) return res.status(403).send('Unauthorized access') // Handle command injection
-  if (isAdmin === 2) return res.redirect('../'); // Redirect back to home page when clicked -- gonna get rid of this by including it in html instead
+  if (currentUser === 2) return res.redirect('../'); // Redirect back to home page when clicked -- gonna get rid of this by including it in html instead
 
   res.render('create-listing', {currentUser, name});
 });
