@@ -14,11 +14,11 @@ body {
 }
 
 nav {
-  margin-bottom: 120px;
+  margin-bottom: 115px;
 }
 
 .filter-buttons {
-  margin-top: 14px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   gap: 24px;
@@ -31,15 +31,20 @@ nav {
 
 .filter-button-price,
 .filter-button-favorites {
+  margin-top: 115px;
   width: 73px;
   height: 36px;
   border-radius: 50px;
-  background-color: white;
+  background-color: rgba(233, 233, 233, 0.993);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-button-favorites .heart-icon {
+  color: #ac626f;
 }
 
 .product-listings {
@@ -55,10 +60,8 @@ nav {
 .product {
   width: 241px;
   height: 265px;
-  // border: 1px solid #41463D;
-  border-color: #41463D;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 8px rgba(0, 4, 6, 0.8);
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -66,6 +69,18 @@ nav {
   align-items: center;
   position: relative;
   box-sizing: border-box;
+  background-color: #41463D;
+}
+
+.product .product-title {
+  font-weight: bold;
+  color:  rgba(233, 233, 233, 0.993);
+  text-decoration: none; /* Remove underline */
+}
+
+.product .product-price {
+  font-weight: bold;
+  color: #D9D9D9;
 }
 
 .product img {
@@ -79,6 +94,7 @@ nav {
 .product .product-header {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .product .product-footer {
@@ -99,7 +115,7 @@ nav {
 
 .product .favorite-icon {
   position: absolute;
-  top: 40px;
+  top: 45px;
   right: 25px;
   cursor: pointer;
 }
@@ -152,10 +168,11 @@ nav {
 }
 
 .background-layer {
+  border-radius: 50px;
   position: fixed;
   top: 0;
   width: 95%;
-  height: 98%;
+  height: 100%;
   background-color: base.$secondary-background-color;
   z-index: -1;
 
