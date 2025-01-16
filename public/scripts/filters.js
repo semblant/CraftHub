@@ -4,6 +4,7 @@ $(() => {
   let lastMinPrice = null;
   let lastMaxPrice = null;
 
+  // Function to fetch items from the server and update the DOM
   const fetchItems = (url) => {
     $.ajax({
       method: 'GET',
@@ -13,6 +14,7 @@ $(() => {
         const $itemsList = $('.product-listings');
         $itemsList.empty();
 
+        // Iterate through the items and append them to the DOM
         for (const item of response.items) {
           const $item = $(`
           <div class="product">
@@ -38,13 +40,16 @@ $(() => {
   // Filter items by price
   $('.filter-button-price').click(() => {
     if (isPriceFilterActive) {
+      // If the price filter is active, fetch all items
       fetchItems('/api/items');
       isPriceFilterActive = false;
     } else {
+      // Prompt the user for min and max price if not already set
       if (lastMinPrice === null || lastMaxPrice === null) {
         lastMinPrice = prompt("Enter minimum price:");
         lastMaxPrice = prompt("Enter maximum price:");
       }
+      // Fetch items within the specified price range
       if (lastMinPrice !== null && lastMaxPrice !== null) {
         fetchItems(`/api/items/filter/price?minPrice=${lastMinPrice}&maxPrice=${lastMaxPrice}`);
         isPriceFilterActive = true;
@@ -56,9 +61,11 @@ $(() => {
   // Filter favorited items
   $('.filter-button-favorites').click(() => {
     if (isFavoritesFilterActive) {
+      // If the favorites filter is active, fetch all items
       fetchItems('/api/items');
       isFavoritesFilterActive = false;
     } else {
+      // Fetch only favorited items
       fetchItems('/api/items/favorites');
       isFavoritesFilterActive = true;
       isPriceFilterActive = false; // Reset other filter

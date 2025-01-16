@@ -1,5 +1,6 @@
 const db = require('../connection');
 
+// Function to get items with their images and favorite status for a specific user
 const getItemsWithImages = (userId) => {
   const query = `
     SELECT items.*, item_images.image_url,
@@ -14,6 +15,7 @@ const getItemsWithImages = (userId) => {
     });
 };
 
+// Function to get items within a price range with their images and favorite status for a specific user
 const getItemsByPrice = (minPrice, maxPrice, userId) => {
   const query = `
     SELECT items.*, item_images.image_url,
@@ -29,6 +31,7 @@ const getItemsByPrice = (minPrice, maxPrice, userId) => {
     });
 };
 
+// Function to get favorited items for a specific user
 const getFavoritedItems = (userId) => {
   const query = `
     SELECT items.*, item_images.image_url,
@@ -44,6 +47,7 @@ const getFavoritedItems = (userId) => {
     });
 };
 
+// Function to toggle the favorite status of an item for a specific user
 const favoriteItem = (userId, itemId) => {
   const query = `
     INSERT INTO favorites (user_id, item_id, is_active)
