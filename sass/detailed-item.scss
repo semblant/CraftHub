@@ -1,0 +1,223 @@
+@use 'base';
+
+body {
+  padding-top: 50px;
+}
+
+/* User Header */
+.userHeader {
+  width: 90%; /* Adjust width for smaller screens */
+  font-size: 16px; /* Slightly smaller font size */
+  padding: 8px;
+  padding-left: 15px;
+  margin: 5px auto; /* Reduce margin */
+  border-radius: 15px; /* Adjust radius for better mobile look */
+}
+
+/* Item Title and Price */
+.itemTitleAndPrice {
+  width: 90%;
+  display: flex;
+  flex-direction: row; /* Stack title and price vertically */
+  justify-content: space-between;
+  align-items: baseline; /* Align text to the left */
+  gap: 5px; /* Add spacing between elements */
+  margin: 10px;
+  margin-right: 10px;
+}
+
+.itemTitleAndPrice h1 {
+  font-size: 20px; /* Slightly smaller font size */
+  margin-bottom: 5px; /* Add spacing below title */
+}
+
+.fa-heart {
+  font-size: 22px; /* Smaller font size for the heart icon */
+  color: #414141;
+}
+
+/* Item Details Section */
+.itemContainer {
+  display: flex;
+  background: base.$secondary-background-color;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  text-align: center;
+  overflow: hidden;
+  height: auto; /* Allow the container to grow with content */
+  margin: 5px;
+  padding: 7px;
+  max-width: 985; /* Use full screen width */
+}
+
+.itemPhoto {
+  max-width: 90%;
+  height: auto;
+  margin: 10px auto; /* Center the photo */
+  border-radius: 8px;
+}
+
+.itemDescription {
+  width: 90%; /* Use full width */
+  font-size: 14px; /* Smaller font size */
+  margin-top: 10px;
+}
+
+/* Item Actions Section */
+.itemActions {
+  width: 70%;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.itemActionButtons {
+  padding-bottom: 10px;
+}
+
+.sellItem,
+.removeItem,
+.contactSeller {
+  transform: scale(1); /* Normal button size */
+  border: none;
+  border-radius: 50px;
+  background-color: base.$button-color;
+  color: base.$button-text-colour;
+}
+
+/* Login Message */
+.itemActions p {
+  font-size: 14px;
+  color: #d11601;
+
+}
+
+/* Desktop View ONLY */
+@media only screen and (min-width: 961px) {
+
+  body {
+    padding-top: 100px;
+  }
+
+  /* User Header */
+.userHeader {
+  width: 80%;
+  font-size: 18px;
+  color: base.$header-text-colour;
+  background: base.$primary-border-color;
+  padding: 10px;
+  padding-left: 20px;
+  text-align: left;
+  margin: 10px auto;
+  border-radius: 20px;
+  font-weight: normal;
+  flex-shrink: 0;
+}
+
+/* Item Title and Price */
+.itemTitleAndPrice {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+  flex-shrink: 0;
+
+}
+
+.itemTitleAndPrice h1 {
+  font-size: 22px;
+  color: base.$text-color;
+  font-weight: normal;
+}
+
+
+.fa-heart {
+  color: #414141;
+  font-size: 24px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.fa-heart:hover {
+  color: #ac626f;
+  text-shadow: black 1px 0 3px;
+}
+
+/* Item Details Section */
+.itemContainer {
+  display: flex;
+  background: base.$secondary-background-color;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin: 10px;
+  max-width: 800px;
+  text-align: center;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.itemPhoto {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 5px;
+  flex-grow: 1;
+  align-self: center;
+  object-fit: cover;
+}
+
+.itemDescription {
+  width: 70% ;
+  text-align: left;
+  font-size: 16px;
+  color: base.$text-color;
+  margin-top: 20px;
+}
+
+/* Item Actions Section */
+.itemActions {
+  margin-top: 10px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.itemActionButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+}
+
+
+/* Buttons */
+.sellItem,
+.removeItem,
+.contactSeller {
+  transform: scale(1.2);
+  border: none;
+  border-radius: 50px;
+  background-color: base.$button-color;
+  color: base.$button-text-colour;
+}
+
+.sellItem:hover {
+  box-shadow: base.$primary-border-color 2px 2px 2px 2px;
+}
+
+.removeItem:hover {
+  box-shadow: base.$primary-border-color 2px 2px 2px 2px;
+}
+
+.contactSeller:hover {
+  box-shadow: base.$primary-border-color 2px 2px 2px 2px;
+}
+
+/* Login Message */
+.itemActions p {
+  font-size: 16px;
+  color: #d11601;
+  margin-top: 10px;
+}
+}

@@ -95,9 +95,7 @@ router.post('/:id', (req, res) => {
     sellItem.then(() =>{
     res.redirect('/');
     })
-  })
-
-
+  });
 });
 
 
