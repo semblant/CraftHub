@@ -11,21 +11,19 @@
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="stylesheet" href="/styles/layout.css">
   <link rel="stylesheet" href="/styles/nav.css">
+  <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@400;700&display=swap" rel="stylesheet">
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
-  <script defer src="/scripts/items.js"></script>
-  <script defer src="/scripts/filters.js"></script>
   <script defer src="/scripts/back-to-top.js"></script>
   <script defer src="/scripts/favorite-item.js"></script>
+  <script defer src="/scripts/filters.js"></script>
+  <script defer src="/scripts/product-tilt.js"></script>
 </head>
 <body>
   <!-- Include Partials header -->
   <%- include('partials/_nav') %>
-  <div class="search-bar">
-    <input type="text" placeholder="Search...">
-    <i class="search-icon"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i></i>
-  </div>
   <div class="background-layer"></div>
+  <div class="filter-background"></div>
   <div class="filter-buttons">
     <button class="filter-button-price">
       <i class="filter-icon"><i class="fa-solid fa-filter" style="color: #000000;"></i></i>
@@ -44,17 +42,14 @@
           <span class="product-price">$<%= item.price %></span>
         </div>
         <img src="<%= item.image_url %>" alt="<%= item.title %>">
-        <div class="product-footer">
-          <button class="chat-button"><i class="fa-regular fa-comment" style="color: #ffffff;"></i></button>
-        </div>
-        <i class="favorite-icon" data-item-id="<%= item.id %>" onclick="toggleFavorite('<%= item.id %>')"></i>
+        <div class="product-footer"></div>
+        <i class="favorite-icon fa-solid fa-heart" data-item-id="<%= item.id %>"></i>
       </div>
     <% }) %>
   </div>
   <button class="back-to-top"><i class="fa-solid fa-arrow-up" style="color: #ffffff;"></i></button>
-  <button class="chat-button">
-    <i class="fa-solid fa-pen" style="color: #ffffff;"></i>
-    <div class="notification">1</div>
+  <button class="chat-button" onclick="window.location.href='/messages'">
+    <i class="fa-solid fa-comment" style="color: #ffffff;"></i>
   </button>
 </body>
 </html>

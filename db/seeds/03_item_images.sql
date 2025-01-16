@@ -1,13 +1,13 @@
 -- ItemImages table seeds
 
 INSERT INTO item_images (item_id, image_url) VALUES
-(1, 'https://i.etsystatic.com/25519128/r/il/4fdfb6/5751881320/il_794xN.5751881320_t0d7.jpg'),
-(2, 'https://i.etsystatic.com/7192509/r/il/4672ef/2135170489/il_794xN.2135170489_k8db.jpg'),
-(3, 'https://i.etsystatic.com/12345678/r/il/abcd1234/1234567890/il_794xN.1234567890_abcd.jpg'),
-(4, 'https://i.etsystatic.com/87654321/r/il/efgh5678/0987654321/il_794xN.0987654321_efgh.jpg'),
-(5, 'https://i.etsystatic.com/23456789/r/il/ijkl9012/3456789012/il_794xN.3456789012_ijkl.jpg'),
-(6, 'https://i.etsystatic.com/34567890/r/il/mnop3456/4567890123/il_794xN.4567890123_mnop.jpg'),
-(7, 'https://i.etsystatic.com/45678901/r/il/qrst7890/5678901234/il_794xN.5678901234_qrst.jpg'),
-(8, 'https://i.etsystatic.com/67890123/r/il/uvwx5678/6789012345/il_794xN.6789012345_uvwx.jpg'),
-(9, 'https://i.etsystatic.com/78901234/r/il/yzab6789/7890123456/il_794xN.7890123456_yzab.jpg'),
-(10, 'https://i.etsystatic.com/89012345/r/il/cdef7890/8901234567/il_794xN.8901234567_cdef.jpg');
+(1, 'https://th.bing.com/th/id/OIG1.OD6haatsPw7KJCbq2zHo?w=1024&h=1024&rs=1&pid=ImgDetMain'),
+(2, 'https://th.bing.com/th/id/OIG4.fiuQ3ZTkpP7lNe0O70Cl?pid=ImgGn'),
+(3, 'https://th.bing.com/th/id/OIG2.0YvyAT9Rnk8FPO1XBDp_?w=1024&h=1024&rs=1&pid=ImgDetMain'),
+(4, 'https://th.bing.com/th/id/OIG3.2A8Lt8FVHKeGY1JQw_uL?pid=ImgGn'),
+(5, 'https://th.bing.com/th/id/OIG3.JvQgxfYWR7_9ydhhUSo1?w=1024&h=1024&rs=1&pid=ImgDetMain'),
+(6, 'https://th.bing.com/th/id/OIG2.pK3vSjn4NiDJJ1_H6Zdm?w=1024&h=1024&rs=1&pid=ImgDetMain'),
+(7, 'https://th.bing.com/th/id/OIG2.5XAyYGcdJ_0G6rtz.HfO?pid=ImgGn'),
+(8, 'https://th.bing.com/th/id/OIG1.x4zO1CQ0NOo4LCfAs3.i?w=1024&h=1024&rs=1&pid=ImgDetMain'),
+(9, 'https://th.bing.com/th/id/OIG4.SrqQPjlsyDPGeOCHlc8A?w=1024&h=1024&rs=1&pid=ImgDetMain'),
+(10, 'https://th.bing.com/th/id/OIG2..iIYIeuMgEFIMFTezh4Z?w=1024&h=1024&rs=1&pid=ImgDetMain');

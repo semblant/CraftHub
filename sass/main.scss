@@ -14,47 +14,55 @@ body {
 }
 
 nav {
-  margin-bottom: 120px;
+  margin-bottom: 115px;
 }
 
-.search-bar {
-  margin-top: 150px;
-  width: 90%;
-  max-width: 371px;
-  height: 40px;
-  border-radius: 15px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.search-bar input {
-  border: none;
-  outline: none;
-  flex-grow: 1;
-  font-size: 16px;
-}
-
-.search-bar .search-icon {
-  color: base.$text-color;
+.filter-background {
+  border-radius: 30px;
+  position: fixed;
+  top: 60px;
+  width: 280px;
+  height: 100px;
+  background-color: base.$background-colour;
+  z-index: 5; /* Ensure it stays behind the filter buttons */
 }
 
 .filter-buttons {
-  margin-top: 14px;
+  margin-top: -4px;
   display: flex;
   justify-content: center;
   gap: 24px;
+  position: fixed;
+  top: 1px;
+  z-index: 10;
 }
 
 .filter-button-price:hover,
 .filter-button-favorites:hover {
   cursor: pointer;
+  animation: pop 0.3s forwards;
+}
+
+.filter-button-price:active,
+.filter-button-favorites:active {
+  animation: pop 0.3s forwards; /* Add pop animation on click */
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .filter-button-price,
 .filter-button-favorites {
+  margin-top: 115px;
   width: 73px;
   height: 36px;
   border-radius: 50px;
@@ -63,56 +71,87 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: base.$box-shadow-small;
 }
 
 .product-listings {
-  margin-top: 15px;
+  margin-top: 190px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 100px;
 }
 
 .product {
   width: 241px;
   height: 265px;
-  border: 1px solid #41463D;
   border-radius: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: base.$box-shadow-medium;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   position: relative;
+  box-sizing: border-box;
+  background-color: base.$primary-border-color;
+  transition: transform 0.1s ease-out; // Fast animation
+  will-change: transform; // GPU optimization for smooth transitions
+}
+
+
+
+.product .product-title {
+  @include base.product-title-styles;
+}
+
+.product .product-price {
+  @include base.product-price-styles;
 }
 
 .product img {
-  width: 230px;
-  height: 232px;
+  width: 100%;
+  height: 90%;
   border-radius: 15px;
+  object-fit: cover;
+  margin: 0 auto;
 }
 
 .product .product-header {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .product .product-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-}
-
-.favorite-icon {
-  color: #414141;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 1.0);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)); /* Feathered edge effect */
+  border-radius: 15px;
+  color: white;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .product .favorite-icon {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 45px;
+  right: 25px;
   cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.product .favorite-icon:hover {
+  transform: scale(1.2); /* Grow in size on hover */
 }
 
 .back-to-top {
@@ -122,14 +161,9 @@ nav {
   transform: translateX(-50%);
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background-color: base.$header-colour;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  cursor: pointer;
+  @include base.button-styles;
   display: none; /* Initially hidden */
+  transition: transform 0.3s;
 }
 
 .chat-button {
@@ -138,43 +172,44 @@ nav {
   right: 11px;
   width: 56px;
   height: 56px;
-  border-radius: 50%;
-  background-color: base.$header-colour;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  cursor: pointer;
-}
-
-.chat-button .notification {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: red;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+  @include base.button-styles;
+  transition: transform 0.3s;
 }
 
 .background-layer {
+  border-radius: 50px;
   position: fixed;
   top: 0;
   width: 95%;
-  height: 98%;
-  border-bottom-right-radius: 12%;
-  border-bottom-left-radius: 12%;
+  height: 100%;
   background-color: base.$secondary-background-color;
   z-index: -1;
-
 }
 
-@media (max-width: 390px) {
+@media (min-width: 439px) {
+
+  .filter-buttons {
+    position: fixed; /* Move filter buttons to nav bar */
+    margin-top: -4px;
+  }
+
+  .product-listings {
+    margin-top: 180px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 100px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .product {
+    margin: 10px;
+  }
+}
+
+@media (max-width: 439px) {
   .nav {
     .crafthubLogo {
       width: 132px;
