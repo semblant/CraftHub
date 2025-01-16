@@ -30,7 +30,6 @@ nav {
   font-size: 35px;
 }
 
-
 .fa-solid.fa-bars:hover {
   animation: bounce 0.3s infinite alternate
   }
@@ -38,14 +37,16 @@ nav {
 @keyframes bounce {
   to {transform: scale(1.2);}
 }
+
 .menuItems{
   position: fixed; /* display menu overtop of content */
   top: 50px; /* Adjust to match your layout */
   right: 20px; /* Adjust to match your layout */
-  background-color: base.$primary-border-color;
+  background-color: #41463D;
   border-radius: 8px;
   padding: 10px;
   display: none; /* Initially hidden */
+  text-decoration: none;
 
   :first-child {
     font-size: 20px;
@@ -56,6 +57,7 @@ nav {
   }
 
   li:not(:first-child) {
+  background-color: base.$header-colour;
   list-style-type: none;
   font-size: 16px;
   font-family: sans-serif; /* for now */
@@ -77,7 +79,7 @@ nav {
 
 /* Login Styling */
 .userId {
-  border: base.$primary-border-color;
+  border: #41463D;
   margin-right: 10px;
   height: 30px;
   border-radius: 5px;

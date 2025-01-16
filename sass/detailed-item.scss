@@ -105,7 +105,7 @@ body {
   width: 80%;
   font-size: 18px;
   color: base.$header-text-colour;
-  background: base.$primary-border-color;
+  background: #41463D;
   padding: 10px;
   padding-left: 20px;
   text-align: left;
@@ -128,7 +128,7 @@ body {
 
 .itemTitleAndPrice h1 {
   font-size: 22px;
-  color: base.$text-color;
+  color: black;
   font-weight: normal;
 }
 
@@ -173,7 +173,7 @@ body {
   width: 70% ;
   text-align: left;
   font-size: 16px;
-  color: base.$text-color;
+  color: black;
   margin-top: 20px;
 }
 
@@ -204,15 +204,15 @@ body {
 }
 
 .sellItem:hover {
-  box-shadow: base.$primary-border-color 2px 2px 2px 2px;
+  box-shadow: #41463D 2px 2px 2px 2px;
 }
 
 .removeItem:hover {
-  box-shadow: base.$primary-border-color 2px 2px 2px 2px;
+  box-shadow: #41463D 2px 2px 2px 2px;
 }
 
 .contactSeller:hover {
-  box-shadow: base.$primary-border-color 2px 2px 2px 2px;
+  box-shadow: #41463D 2px 2px 2px 2px;
 }
 
 /* Login Message */
