@@ -10,10 +10,43 @@ $button-text-colour: white;
 
 /* Font */
 $header-text-colour: white;
-$nav-font-family:  "Bungee", sans-serif;
-$body-font-family:  "Source Sans 3", sans-serif;
+$nav-font-family: "Bungee", sans-serif;
+$body-font-family: "Hepta Slab", sans-serif;
 $primary-font-size: 24px;
 
 /* Border */
 $primary-border-color: #333;
 
+/* Box Shadows */
+$box-shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1);
+$box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.5);
+
+/* Common Styles */
+@mixin button-styles {
+  background-color: $button-color;
+  color: $button-text-colour;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+@mixin product-title-styles {
+  font-weight: bold;
+  color: white;
+  text-decoration: none; /* Remove underline */
+  max-height: 40px; /* Set a maximum height */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis for overflow text */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+}
+
+@mixin product-price-styles {
+  font-weight: bold;
+  color: #D9D9D9;
+  font-style: italic; /* Italicize the product prices */
+}
