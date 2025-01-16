@@ -45,8 +45,10 @@ $(document).ready(() => {
       const sidebarContent = `
         <div class="chat-item" data-user-id="${otherUserId}">
           <ul>User ${otherUserId === 1 ? 'Admin' : 'Buyer'}</ul>
-          <p>Last Message: ${lastMessage}</p>
-          <small>${timestamp ? new Date(timestamp).toLocaleString() : "No messages yet"}</small>
+          <div id="content">
+            <p>Last Message: ${lastMessage}</p>
+            <small id="sent-time">${timestamp ? new Date(timestamp).toLocaleString() : "No messages yet"}</small>
+          </div>
         </div>
       `;
       
