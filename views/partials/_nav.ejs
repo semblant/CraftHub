@@ -1,12 +1,12 @@
 <nav>
-    <img class="crafthubLogo" src="../docs/CraftHub_Logo_white.png" alt="CraftHub logo in the colour white">
+    <a href="/"><img class="crafthubLogo" src="../docs/CraftHub_Logo_white.png" alt="CraftHub logo in the colour white"></a>
     <!-- If user is logged in display menu options -->
     <% if (currentUser) { %>
 
     <!-- Hamburger Icon -->
     <i class="fa-solid fa-bars"></i>
     <div class="menuItems">
-      <li class="loginTrue">Hello <%= name%>!</li>
+      <li class="loginTrue">Hello "<%= name%>"!</li>
       <li class="createListing"><a href="/create-listing">Create Listing</a></li></form>
       <!-- STRETCH FEATURE <li>My Listings</li> -->
       <li class="messages"><a href="/messages">Messages</a></li>
