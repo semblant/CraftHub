@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
   let senderId
   let receiverId
 
-  if (name === 'Admin User') {
+  if (name === 'Seller') {
     senderId = 1;
     receiverId = 2;
   } else {
@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
     .then(messages => {
       res
         .status(200)
-        .json({ messages });
+        .json({ messages, senderId });
     })
     .catch(err => {
       res
@@ -41,7 +41,6 @@ router.get('/', (req, res) => {
 // Post route for new sent messages
 router.post('/', async (req, res) => {
 
-  console.log(req.body.content);
   const content = req.body.content;
   const userId = req.session.username;
 
@@ -52,7 +51,7 @@ router.post('/', async (req, res) => {
   let senderId
   let receiverId
 
-  if (userId === 'Admin User') {
+  if (userId === 'Seller') {
     senderId = 1;
     receiverId = 2;
   } else {
@@ -79,11 +78,11 @@ router.post('/', async (req, res) => {
 
 // Get route for sidebar list
 router.get('/availableChat', (req, res) => {
-  const loggedInUser = req.session.username;
+  const loggedInUser = req.session.username;  
   let otherUserId;
 
   // Determine who is logged in and who the other user is
-  if (loggedInUser === 'Admin User') {
+  if (loggedInUser === 'Seller') {
     otherUserId = 2; // Buyer
   } else {
     otherUserId = 1; // Admin
@@ -95,13 +94,14 @@ router.get('/availableChat', (req, res) => {
     WHERE (sender_id = $1 AND receiver_id = $2) 
        OR (sender_id = $2 AND receiver_id = $1)
     ORDER BY timestamp DESC 
-    LIMIT 1;`, [loggedInUser === 'Admin User' ? 1 : 2, otherUserId])
+    LIMIT 1;`, [loggedInUser === 'Seller' ? 1 : 2, otherUserId])
     .then(data => {
+
       const latestMessage = data.rows[0];
       const chatSidebarInfo = {
         otherUserId: otherUserId,
-        lastMessage: latestMessage ? latestMessage.text : "No messages yet",
-        timestamp: latestMessage ? latestMessage.timestamp : null
+        lastMessage: latestMessage ? latestMessage.content : "No messages yet",
+        timestamp: latestMessage ? new Date(latestMessage.timestamp).toLocaleTimeString() : null
       };
       res.json(chatSidebarInfo);  // Send the sidebar data to the client
     })

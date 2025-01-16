@@ -10,51 +10,58 @@ const fetchMessages = function () {
 
       $('.active-messages').empty();
 
-      // console.log(response, 'RESPONSE!!!!!!');
-      // console.log(response.messages, '!! FIRST MESSAGE !!')
       const messages = response.messages;
+      const senderId = response.senderId;
 
       for (let message of messages) {
 
         const messageHtml = `
-          <div class="message-sent">
+          <div class="${senderId === message.sender_id ? "message-sent" : "message-received"}">
             <p>${message.content}</p>
             <span class="timestamp">${new Date(message.timestamp).toLocaleTimeString()}</span>
           </div>
           `;
         $('.active-messages').append(messageHtml);
+
       }
 
       })
 };
 
 $(document).ready(() => {
-  console.log('Hello');
 
   fetchMessages();
 
   // Reload messages every five seconds
   setInterval(fetchMessages, 5000);
 
+  // Get request for sidebar display
   $.ajax({
     url: '/api/messages/availableChat',
     method: 'GET',
-    success: function(response) {
-      const { otherUserId, lastMessage, timestamp } = response;
+    success: (response) => {
 
+      const maxMessageLength = 35;
+
+      const { otherUserId, lastMessage, timestamp } = response;
+      const truncatedMessage = lastMessage.length > maxMessageLength
+      ? lastMessage.substring(0, maxMessageLength) + '...'
+      : lastMessage;
+
+      
       const sidebarContent = `
         <div class="chat-item" data-user-id="${otherUserId}">
-          <ul>User ${otherUserId === 1 ? 'Admin' : 'Buyer'}</ul>
+          <ul>${otherUserId === 1 ? 'Seller' : 'Buyer'}</ul>
           <div id="content">
-            <p>Last Message: ${lastMessage}</p>
-            <small id="sent-time">${timestamp ? new Date(timestamp).toLocaleString() : "No messages yet"}</small>
+            <p>${truncatedMessage}</p>
+            <small id="sent-time">${timestamp}</small>
           </div>
         </div>
       `;
       
       $('.message-list').append(sidebarContent);
     },
-    error: function(err) {
+    error: (err) => {
       console.error('Error loading sidebar chat:', err);
     }
   });
@@ -86,8 +93,15 @@ $(document).ready(() => {
         alert('Failed to send message.');
         console.error(error);
       })
-
   });
+
+  // Use enter key to submit messages
+  $('#message-content').on('keydown', (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      $('#chat-submit').click();
+    } else if (event.key === Enter && event.shiftKey);
+  })
 
 });
 
