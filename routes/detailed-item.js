@@ -99,7 +99,34 @@ router.post('/:id', (req, res) => {
 });
 
 
-router.get('/:id', (req, res) => {
+/**
+ * Queries the 'users' table for a specific user by ID
+ *
+ * @param {Number} userID - The userID to query for in the database
+ * @returns {Promise<Object|undefined>} - resolves with user object if found, or undefined if no user exists
+ */
+const userLookup = async (userID) => {
+  // Validate User (in case this function is used again elsewhere)
+  if (!userID) {
+    return Promise.reject(new Error('Invalid userID: cannot be empty'));
+  }
+
+  // Query specific user data
+  const query = 'SELECT * FROM users WHERE id = $1;';
+  const values = [userID];
+
+
+  return db.query(query, values)
+    .then(data => {
+      return data.rows[0]; // return user object or undefined if not found
+    })
+    .catch((err) => {
+      console.error('Error querying user:', err);
+      throw err; // throw the error for handling in the calling function
+    });
+};
+
+router.get('/:id', async (req, res) => {
   // Store User info
   const currentUser = req.session.user_status ? req.session.user_status : null; //checks if user is admin
   const currentUserId = req.session.userId ? Number(req.session.userId) : null;
@@ -108,9 +135,14 @@ router.get('/:id', (req, res) => {
   // Store item information
   const itemId = req.params.id;
 
-  //  Get object of item details
-  const item = itemLookup(itemId);
-  item.then((item) =>{
+  try {
+    // Get object of item details
+    const item = await itemLookup(itemId);
+
+    // Query the user's name in the DB based on item.user_id (creator of item)
+    const user = await userLookup(item.user_id)
+
+    // Store variables
     const templateVars = {
       currentUserId,
       name,
@@ -121,10 +153,15 @@ router.get('/:id', (req, res) => {
       price: item.price,
       created: item.created_at,
       createUserId: item.user_id,
+      createUsername: user.name,
       images: item.image_url
     };
+
     res.render('detailed-item', templateVars);
-  })
+  } catch (err) {
+    console.log('An error occured retrieving item details', err);
+    res.status(500).send('An error occured while retrieving item details')
+  };
 });
 
 
