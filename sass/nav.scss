@@ -46,7 +46,6 @@ nav {
   border-radius: 8px;
   padding: 10px;
   display: none; /* Initially hidden */
-  text-decoration: none;
 
   :first-child {
     font-size: 20px;
@@ -72,10 +71,14 @@ nav {
 
   li:not(:first-child):hover {
     background-color: base.$header-colour;
-    cursor: pointer;
+
+  }
+
+  a {
+    text-decoration: none;
+    color: base.$header-text-colour;
   }
 }
-
 
 /* Login Styling */
 .userId {
