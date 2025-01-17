@@ -79,7 +79,8 @@ body {
 .sellItem,
 .removeItem,
 .contactSeller {
-  transform: scale(1); /* Normal button size */
+  width: calc(100% - 300px);
+  padding: 5px;
   border: none;
   border-radius: 50px;
   background-color: base.$button-color;
@@ -188,15 +189,26 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 50px;
+  gap: 80px;
 }
 
 
 /* Buttons */
 .sellItem,
-.removeItem,
+.removeItem {
+  width: 150%;
+  padding: 10px;
+  border: none;
+  border-radius: 50px;
+  background-color: base.$button-color;
+  color: base.$button-text-colour;
+}
+
+
+
 .contactSeller {
-  transform: scale(1.2);
+  width: calc(100% - 70%);
+  padding: 10px;
   border: none;
   border-radius: 50px;
   background-color: base.$button-color;
